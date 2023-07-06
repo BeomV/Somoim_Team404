@@ -24,7 +24,7 @@
     <div class="join_section">
         <jsp:include page="./som_top_menu.jsp"></jsp:include>
         <div class="img_info">
-            <img src="resources/uploadimg/banner_test.png" height="300" width="1200">
+            <img src="resources/uploadimg/${vo2.save_name}" height="300" width="1200">
         </div>
         <div class="som_tit">
             <h1 class="main_tit" style="padding: 10px;">${vo2.som_title}</h1>

@@ -6,7 +6,7 @@
 <div class="header">
         <div class="gnb">
             <div class="logo">
-                <a href="home.do"><img src="resources/img/logo.png"></a>
+                <a href="home.do"><img src="resources/uploadimg/logo.png"></a>
             </div>
             <nav>
                 <ul>

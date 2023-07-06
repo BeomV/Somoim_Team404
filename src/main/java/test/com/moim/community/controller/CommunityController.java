@@ -24,10 +24,10 @@ import test.com.moim.community.service.CommunityService;
 
 
 public class CommunityController {
-	
+
 	@Autowired
 	HttpSession session;
-	
+
 	@Autowired
 	CommunityService service;
 
@@ -46,7 +46,7 @@ public class CommunityController {
 
 		return "community/selectAll";
 	}
-	
+
 	@RequestMapping(value = "/community_selectOne.do", method = RequestMethod.GET)
 	public String community_selectOne(CommunityVO vo, Model model) {
 		log.info("community_selectOne.do().....");
@@ -58,34 +58,34 @@ public class CommunityController {
 
 		return "community/selectOne";
 	}
-	
+
 	@RequestMapping(value = "/community_insert.do", method = RequestMethod.GET)
 	public String community_insert(Model model) {
 		String userId = (String) session.getAttribute("user_id");
-		model.addAttribute("user_id", userId);
+		model.addAttribute("user_id", "tester");
 		log.info("community_insert.do().....");
 
 
 		return "community/insert";
 	}
-	
+
 	@RequestMapping(value = "/community_insertOK.do", method = RequestMethod.POST)
 	public String community_insertOK(Model model , CommunityVO vo){
 		String userId = (String) session.getAttribute("user_id");
 		model.addAttribute("user_id", userId);
 		log.info("/community_insertOK.do...{}", vo);
-		
+
 		int result = service.insert(vo);
 		log.info("result...{}", result);
-		
+
 		if(result==1) {
 			return "redirect:community_selectAll.do";
 		}else {
 			return "redirect:community_insert.do";
 		}
-		
+
 	}
-	
+
 	@RequestMapping(value = "/community_update.do", method = RequestMethod.GET)
 	public String community_update(CommunityVO vo, Model model) {
 		log.info("/community_update.do...{}", vo);
@@ -96,35 +96,35 @@ public class CommunityController {
 
 		return "community/update";
 	}
-	
+
 	@RequestMapping(value = "/community_updateOK.do", method = RequestMethod.POST)
 	public String community_updateOK(CommunityVO vo) {
 		log.info("/community_updateOK.do...{}", vo);
-		
+
 		int result = service.update(vo);
 		log.info("result...{}", result);
-		
+
 		if(result==1) {
 			return "redirect:community_selectOne.do?num="+vo.getNum();
 		}else {
 			return "redirect:community_update.do?num="+vo.getNum();
 		}
-		
+
 	}
-	
+
 	@RequestMapping(value = "/community_deleteOK.do", method = RequestMethod.GET)
 	public String community_deleteOK(CommunityVO vo){
 		log.info("/community_deleteOK.do...{}", vo);
-		
+
 		int result = service.delete(vo);
 		log.info("result...{}", result);
-		
+
 		if(result==1) {
 			return "redirect:community_selectAll.do";
 		}else {
 			return "redirect:community_selectOne.do?num="+vo.getNum();
 		}
-		
+
 	}
-	
+
 }
