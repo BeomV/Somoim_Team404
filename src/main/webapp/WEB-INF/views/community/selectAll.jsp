@@ -37,7 +37,7 @@
 	</div>
 	<div class="community_navigation_upload">
 		<button type="button">
-			<a href="/moim/community_insert.do">피드 작성</a>
+			<a href="/community_insert.do">피드 작성</a>
 		</button>
 	</div>
 
