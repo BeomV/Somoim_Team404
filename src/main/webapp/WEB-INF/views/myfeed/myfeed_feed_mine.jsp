@@ -19,6 +19,72 @@
     $(function(){
     	$("#updatebutton").hide();
     	console.log('onload....');
+    	
+    	$.ajax({
+    		url:'myfeed_feedSelectOne.do',
+    		data : {
+    			user_id:'${user_id}'
+    		},
+    		success : function(data) {
+    			console.log('response data...', data);
+    			const sentence = data.save_name;
+    			console.log('sentence : ', sentence);
+    			
+    			var splitData='';
+    			if(sentence!=null) {
+    				splitData = sentence.split('/').filter(item => item !== 'null');
+    			}
+    			console.log('잘린 데이터 : ', splitData);
+    			
+    			var tag_vos = '';
+    			$.each(splitData, function(index, vo){
+    				console.log(vo);
+    				tag_vos += `
+    					<div class="join_feedbox">
+    			        <ul class="feed_grid">
+                        <li><img src="resources/uploadimg/\${vo}" style="width:100%"></li>
+                        </ul>
+                        </div>
+    				
+    				`;
+    				
+    			});
+    			
+    			$(".djdjdjdj").html(tag_vos);
+    			
+    		},
+    		error : function(xhr, status, error){
+    			console.log('xhr.status', xhr.status);
+    		}
+    	});
+    	
+    	$("#feed_insert").on("click", function (){
+    		console.log('피드 등록 눌렀음');
+	    	var fileName = $("input[name='file']").val();
+    		$.ajax({
+    			url : 'myfeed_insertOK.do',
+    			data : {
+    				user_id : '${user_id}',
+    				save_name : fileName
+    			},
+    			success : function(result) {
+    				console.log('내 피드 사진 등록 : ', result);
+					console.log('file 명 : ', fileName);
+					if(result===1)
+						alert('피드 등록이 완료되었습니다.');
+					else
+						alert('피드 등록 실패했습니다.');
+					
+					location.reload();
+    			},
+    			error : function(xhr, status, error ){
+    				console.log('xhr.status : ', xhr.status);
+    			}
+    		});
+    		
+    	});
+    		
+    	
     });
     
     function myfeed_update() {
@@ -44,10 +110,8 @@
     function myfeed_updateOK() {
         console.log('눌렸다');
 
-        // Get the updated self-introduction from the input field
         let updatedIntroduce = $('#introduce').val();
 
-        // Send the AJAX request to update the self-introduction
         $.ajax({
             url: 'myfeed_feedupdate.do',
             data: {
@@ -56,7 +120,6 @@
             },
             success: function(response) {
                 console.log('ajax successed...:', response);
-                // If the update is successful, update the display on the page
                 $('#letmeintroduce').text(updatedIntroduce);
                 location.reload();
             },
@@ -66,9 +129,14 @@
         });
     }
     
+    function myfeed_insert(){
+    	console.log('피드 업로드 할 거야?');
+    }
+    
     </script>
 </head>
 <body>
+
     <div class="header">
         
 	<jsp:include page="../top_menu.jsp"></jsp:include>
@@ -92,7 +160,12 @@
                     <input type="button" id="updatebutton" onclick="myfeed_updateOK()" value="수정완료">
                 <div class="top_follow" id="feed_mine">
                     <button type="button" style="padding: 5px 12px;" onclick="myfeed_update()">수정하기</button>
-                    <button type="button" style="padding: 5px 12px;">사진추가</button>
+                    
+                    <!-- 피드 업로드 -->
+<!-- 					<form action="myfeed_insertOK.do" enctype="multipart/form-data" method="post"> -->
+<!-- 					<input type="file" id="file" name="file"> -->
+					<button type="button" style="padding: 5px 12px;"><a href="myfeed_upload.do?user_id=${param.user_id }" style="color:white;">피드 등록</a></button>
+<!--                     </form> -->
                     <button type="button" style="padding: 5px 12px;"><a href="point_selectAll.do" style="color:white;">포인트샵</a></button>           
                 </div>
                 <div class="top_follow" id="feed_notmine">
@@ -102,14 +175,15 @@
                 </div>
                 
                 <div class="follower_following">
-                    <span>팔로워: <strong>0</strong></span>
-                    <span>팔로잉: <strong>0</strong></span>
-                    <span>피드: <strong>9</strong></span>
+<!--                     <span>팔로워: <strong>0</strong></span> -->
+<!--                     <span>팔로잉: <strong>0</strong></span> -->
+<!--                     <span>피드: <strong>9</strong></span> -->
                 </div>
             </div>
         </div>
     </div>
 </br>
+	
     <div class="myfeed_group_menu">
         <ul>
             <li><a href="#">피드</a></li>
@@ -121,22 +195,23 @@
         <div class="myfeed_bottom_sec">
 
         </div>
+		<div class = "djdjdjdj">
+		</div>
+<!--         <div class="join_feedbox"> -->
+<!--         <ul class="feed_grid"> -->
+<!--                 <li>이미지 1</li> -->
+<!--                 <li>이미지 2</li> -->
+<!--                 <li>이미지 3</li> -->
+<!--                 <li>이미지 4</li> -->
+<!--                 <li>이미지 5</li> -->
+<!--                 <li>이미지 5</li> -->
+<!--                 <li>이미지 5</li> -->
+<!--                 <li>이미지 5</li> -->
+<!--                 <li>이미지 5</li> -->
 
-        <div class="join_feedbox">
-            <ul class="feed_grid">
-                <li>이미지 1</li>
-                <li>이미지 2</li>
-                <li>이미지 3</li>
-                <li>이미지 4</li>
-                <li>이미지 5</li>
-                <li>이미지 5</li>
-                <li>이미지 5</li>
-                <li>이미지 5</li>
-                <li>이미지 5</li>
+<!--             </ul> -->
 
-            </ul>
-
-        </div>
+<!--         </div> -->
     </div>
 
     <div class="footer">

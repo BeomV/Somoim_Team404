@@ -1,5 +1,7 @@
 package test.com.moim.myfeed.model;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,10 +27,23 @@ public class MyfeedDAOimpl implements MyfeedDAO {
 		return session.selectOne("MYFEED_SELECTONE", vo4);
 	}
 
+//	@Override
+//	public List<MyfeedVO> selectList(MyfeedVO vo4) {
+//		log.info("myfeed_selectList...{}", vo4.getUser_id());
+//		return session.selectList("MYFEED_SELECTLIST", vo4);
+//	}
+
 	@Override
 	public int insert(String user_id) {
 		log.info("first myfeed insert....{}", user_id);
 		return session.insert("MYFEED_INSERT", user_id);
 	}
+
+	@Override
+	public int imginsert(MyfeedVO vo) {
+		log.info("myfeed imginsert....{}", vo);
+		return session.update("MYFEED_IMGINSERT", vo);
+	}
+
 
 }

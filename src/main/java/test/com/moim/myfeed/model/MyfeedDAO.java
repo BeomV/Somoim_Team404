@@ -7,4 +7,8 @@ public interface MyfeedDAO {
 	public MyfeedVO selectOne(MyfeedVO vo4);
 
 	public int insert(String user_id);
+
+	public int imginsert(MyfeedVO vo);
+
+//	public List<MyfeedVO> selectList(MyfeedVO vo4);
 }

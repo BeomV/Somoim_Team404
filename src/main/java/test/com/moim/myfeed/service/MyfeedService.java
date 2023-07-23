@@ -32,5 +32,18 @@ public class MyfeedService {
 		return dao.insert(user_id);
 	}
 
+
+	public int imginsert(MyfeedVO vo) {
+		log.info("imginsert....{}", vo);
+		return dao.imginsert(vo);
+	}
+
+
+//
+//	public List<MyfeedVO> selectList(MyfeedVO vo4) {
+//		log.info("selectList....{}", vo4);
+//		return dao.selectList(vo4);
+//	}
+
 	
 }
