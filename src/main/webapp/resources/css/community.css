@@ -406,11 +406,12 @@ div#insert_content {
     padding: 8px 12px;
 }
 .community_commnets_insert_section button {
-    padding: 8px 24px;
+    /*padding: 8px 24px;*/
     border-radius: 5px;
     border: none;
     background-color: #1785F2;
     color: white;
+    width: auto; /* 버튼의 가로 길이를 댓글 작성 글씨에 맞게 조정 */
 }
 .c_insert_func {
     margin-top: 40px;

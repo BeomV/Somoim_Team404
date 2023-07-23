@@ -21,53 +21,53 @@
     ${message}
 </div>
 <div class="point_list">
-        <ul class="point_somoim">
-            <strong>소모임</strong>
-            <br>
-            <p class="sub_txt">(모임장 권한을 가진 사용자만 이용이 가능합니다.)</p>
-            <c:forEach items="${vos}" var="vo">
-                <c:if test="${vo.category == '소모임'}">
-                    <li>
-                        <p>${vo.item}</p>
-                        <input type="hidden" value="${vo.item}" class="point_item" style="display: none">
-                        <input type="hidden" value="${vo.cash}" class="point_cash" style="display: none">
-                        <button type="button" class="purchase-btn">${vo.cash}원</button>
-                    </li>
-                </c:if>
-            </c:forEach>
-        </ul>
+    <ul class="point_somoim">
+        <strong>소모임</strong>
+        <br>
+        <p class="sub_txt">(모임장 권한을 가진 사용자만 이용이 가능합니다.)</p>
+        <c:forEach items="${vos}" var="vo">
+            <c:if test="${vo.category == '소모임'}">
+                <li>
+                    <p>${vo.item}</p>
+                    <input type="hidden" value="${vo.item}" class="point_item" style="display: none">
+                    <input type="hidden" value="${vo.cash}" class="point_cash" style="display: none">
+                    <button type="button" class="purchase-btn">${vo.cash}원</button>
+                </li>
+            </c:if>
+        </c:forEach>
+    </ul>
 
-        <ul class="point_somoim">
-            <strong>내 피드</strong>
-            <br>
-            <p class="sub_txt">(모든 이용자가 구매 가능합니다.)</p>
-            <c:forEach items="${vos}" var="vo">
-                <c:if test="${vo.category == '내피드'}">
-                    <li>
-                        <p>${vo.item}</p>
-                        <input type="hidden" value="${vo.item}" class="point_item" style="display: none">
-                        <input type="hidden" value="${vo.cash}" class="point_cash" style="display: none">
-                        <button type="button" class="purchase-btn">${vo.cash}원</button>
-                    </li>
-                </c:if>
-            </c:forEach>
-        </ul>
+    <ul class="point_somoim">
+        <strong>내 피드</strong>
+        <br>
+        <p class="sub_txt">(모든 이용자가 구매 가능합니다.)</p>
+        <c:forEach items="${vos}" var="vo">
+            <c:if test="${vo.category == '내피드'}">
+                <li>
+                    <p>${vo.item}</p>
+                    <input type="hidden" value="${vo.item}" class="point_item" style="display: none">
+                    <input type="hidden" value="${vo.cash}" class="point_cash" style="display: none">
+                    <button type="button" class="purchase-btn">${vo.cash}원</button>
+                </li>
+            </c:if>
+        </c:forEach>
+    </ul>
 
-        <ul class="point_somoim">
-            <strong>유저 관리</strong>
-            <br>
-            <p class="sub_txt">(모든 이용자가 구매 가능합니다.)</p>
-            <c:forEach items="${vos}" var="vo">
-                <c:if test="${vo.category == '유저관리'}">
-                    <li>
-                        <p>${vo.item}</p>
-                        <input type="hidden" value="${vo.item}" class="point_item" style="display: none">
-                        <input type="hidden" value="${vo.cash}" class="point_cash" style="display: none">
-                        <button type="button" class="purchase-btn">${vo.cash}원</button>
-                    </li>
-                </c:if>
-            </c:forEach>
-        </ul>
+    <ul class="point_somoim">
+        <strong>유저 관리</strong>
+        <br>
+        <p class="sub_txt">(모든 이용자가 구매 가능합니다.)</p>
+        <c:forEach items="${vos}" var="vo">
+            <c:if test="${vo.category == '유저관리'}">
+                <li>
+                    <p>${vo.item}</p>
+                    <input type="hidden" value="${vo.item}" class="point_item" style="display: none">
+                    <input type="hidden" value="${vo.cash}" class="point_cash" style="display: none">
+                    <button type="button" class="purchase-btn">${vo.cash}원</button>
+                </li>
+            </c:if>
+        </c:forEach>
+    </ul>
 
 </div>
 

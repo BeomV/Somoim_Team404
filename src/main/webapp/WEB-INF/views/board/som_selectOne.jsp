@@ -183,12 +183,30 @@
 <jsp:include page="../top_menu.jsp"></jsp:include>
 
 
+
 <!-- <form action="som_member_insertOK.do" method="POST"> -->
     <div class="join_section">
-        <jsp:include page="./som_top_menu.jsp"></jsp:include>
 
+        <c:set var="isMenuShown" value="false" />
+
+        <%-- somoimUser_id 리스트를 순회하며 일치하는 값이 있는지 검사 --%>
+        <c:forEach items="${somoimUser_id}" var="som_user_id">
+            <c:if test="${som_user_id.user_id eq user_id}">
+                <%-- 일치하는 값이 있으면 isMenuShown 변수를 true로 설정 --%>
+                <c:set var="isMenuShown" value="true" />
+                <%-- som_top_menu.jsp를 포함시킴 --%>
+                <jsp:include page="./som_top_menu.jsp"></jsp:include>
+            </c:if>
+        </c:forEach>
+
+        <%-- isMenuShown 변수가 false일 경우에만 메뉴를 두 번째로 출력 --%>
+        <c:if test="${!isMenuShown}">
+            <div class="join_gnb">
+                <li><a href="som_selectOne.do?num=${num}">홈</a></li>
+            </div>
+        </c:if>
         <div class="img_info">
-            <img style="width: 100%;height: 100%;" src="resources/uploadimg/${vo2.somoim_img}">
+            <img style="width: 100%;" src="resources/uploadimg/${vo2.somoim_img}">
         </div>
         <div class="som_tit">
             <h1 class="main_tit" style="padding: 20px;">${vo2.som_title}</h1>

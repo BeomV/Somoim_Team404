@@ -26,11 +26,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<context:component-scan
-		base-package="test.com.moim" />
-			<!-- NaverLoginBO 빈 등록 -->
-		<beans:bean id="naverLoginBO" class="test.com.moim.userinfo.controller.NaverLoginBO" />
-		
+
 	
 	<context:component-scan base-package="test.com.moim" />
 	

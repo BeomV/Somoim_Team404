@@ -81,6 +81,7 @@
                         </a>
                     </button>
                 </c:if>
+                <c:if test="${vo2.user_id == user_id}">
                 <a href="community_update.do?num=${param.num}" class="button-link">
                     <button type="button" class="edit-button">
                         <i class="fas fa-edit"></i>
@@ -90,6 +91,7 @@
                 <button type="button" class="delete-button">
                     <i class="fas fa-trash-alt"></i>
                 </button>
+                </c:if>
             </a>
             </div>
         </div>
@@ -122,25 +124,25 @@
 									<div class="c_com_top">
 										<strong>${ccoms.user_id}</strong>
 										<span>
-                                            <c:if test="${vo2.user_id == user_id}">
-											<form id="myForm" action="Community_comments_updateOK.do?num=${ccoms.num}">
-												<input type="hidden" name="board_num" value="${ccoms.board_num}">
-                                                <input type="hidden" name="num" value="${ccoms.num}">
-                                                <input type="hidden" name="content" id="hidden_content_input"
-                                                       value="${ccoms.content}">
-											<button id="submitButton" type="submit">
-												<i class="fas fa-edit"></i>
-												<%-- 수정 --%>
-											</button>
-											</form>
-											<form action="Community_comments_deleteOK.do?num=${ccoms.num}">
-												<input type="hidden" name="board_num" value="${ccoms.board_num}">
-                                                <input type="hidden" name="num" value="${ccoms.num}">
-											<button type="submit">
-												<i class="fas fa-trash-alt"></i>
-												<%-- 삭제 --%>
-											</button>
-											</form>
+                                            <c:if test="${ccoms.user_id eq loginUserInfo.user_id}">
+                                                <form id="myForm" action="Community_comments_updateOK.do?num=${ccoms.num}">
+                                                    <input type="hidden" name="board_num" value="${ccoms.board_num}">
+                                                    <input type="hidden" name="num" value="${ccoms.num}">
+                                                    <input type="hidden" name="content" id="hidden_content_input"
+                                                           value="${ccoms.content}">
+                                                <button id="submitButton" type="submit">
+                                                    <i class="fas fa-edit"></i>
+                                                    <%-- 수정 --%>
+                                                </button>
+                                                </form>
+                                                <form action="Community_comments_deleteOK.do?num=${ccoms.num}">
+                                                    <input type="hidden" name="board_num" value="${ccoms.board_num}">
+                                                    <input type="hidden" name="num" value="${ccoms.num}">
+                                                <button type="submit">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                    <%-- 삭제 --%>
+                                                </button>
+                                                </form>
                                             </c:if>
 										</span>
 									</div>
@@ -177,10 +179,10 @@
                                         </div>
                                         </c:if>
                                     </c:forEach>
-									<form action="Community_re_comments_insertOK.do">
+									<form action="Community_re_comments_insertOK.do" onsubmit="return validateAndSubmitForm(this);">
                                     <div class="community_re_commnets_insert_section">
                                         <input type="hidden" name="parent_com" value="${ccoms.num}">
-                                        <input type="hidden" name="user_id" value="${user_id}">
+                                        <input type="hidden" name="user_id" value="${ccoms.user_id}">
                                         <input type="hidden" name="board_num" value="${ccoms.board_num}">
                                         <div style="display: flex; justify-content: center;">
                                         <button class="lovely_insert_button"
@@ -196,18 +198,18 @@
 				</ul>
 			</span>
         </c:forEach>
-        <form action="Community_comments_insertOK.do?num=${vo2.num}">
+        <form action="Community_comments_insertOK.do?num=${vo2.num}" onsubmit="return validateAndSubmitForm(this);">
             <div class="community_commnets_insert_section">
                 <div class="c_comments_user_profile">
                     <div class="c_commnets_user_profile_img">
                         <img style="  object-fit: cover; width: 100%; height: 100%; border-radius: 50%; margin-right: 1.5%;"
-                             src="resources/uploadimg/${vo2.save_name}">
+                             src="resources/uploadimg/${loginUserInfo.save_name}">
                     </div>
-                    <p>${user_id}</p>
+                    <p>${loginUserInfo.user_id}</p>
                 </div>
                 <input type="hidden" name="board_num" value="${vo3.board_num}">
                 <input type="hidden" name="num" value="${vo3.num}">
-                <input type="hidden" name="user_id" value="${user_id}">
+                <input type="hidden" name="user_id" value="${loginUserInfo.user_id}">
                 <input type="text" placeholder="댓글 작성" name="content">
                 <button type="submit">댓글 작성</button>
             </div>
@@ -242,6 +244,22 @@
     </div>
 
 </div>
+
+<script>
+    function validateAndSubmitForm(form) {
+        var contentInput = form.querySelector('input[name="content"]');
+        var contentValue = contentInput.value.trim();
+
+        if (contentValue === '') {
+            alert('댓글 내용을 입력해주세요!');
+            return false; // 폼 제출을 막습니다.
+        }
+
+        // 댓글 내용이 비어있지 않으면, 폼을 제출합니다.
+        return true;
+    }
+</script>
+
 <script>
     const submitButton = document.getElementById('submitButton');
     console.log("submitButton", submitButton);

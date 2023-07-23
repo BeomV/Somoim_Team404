@@ -70,7 +70,7 @@
 
     					<a href="som_selectOne.do?num=\${vo.num}"> <li>
                         <div>
-                            <img src="resources/uploadimg/\${vo.somoim_img}" width="230"; height="230"; style="border-radius:150%; border: 1px lightgray solid;">
+                            <img src="resources/uploadimg/\${vo.somoim_img}" width="150"; height="150"; style="border-radius:150%; border: 1px lightgray solid;">
                         </div>
   						  <p>\${vo.som_title}</p>
                   	    </li> </a>
@@ -127,7 +127,7 @@
                                 <button style="background-color: transparent;" type="submit">삭제하기</button>
                             </form>
                         </div>
-                        <div style="border: 1px solid gray; width:50%;" class="note_content">
+                        <div style="border-bottom: 1px solid gray; width:50%;" class="note_content">
                             \${mes_one.content}
                         </div>
                         <div style="width:30%">
@@ -180,6 +180,101 @@
                     $(function () {
                         longPolling();
                     });
+                    
+                    
+        function som_selectAll(){
+        	console.log('som_selectAll() 버튼 클릭 감지');
+        	
+        	$.ajax({
+        		url:'mysomoim_selectAll.do',
+        		data : {
+        			user_id:'${user_id}'
+        		},
+        		success : function(vos){
+        			console.log('data ??? : ', vos);
+        			
+        			let tag_vos = '';
+        			let count=0;
+        			let elementsPerRow = 4;
+
+        			$.each(vos,function(index,vo){
+        				console.log(index,vo);
+    	    			console.log('somoim_img : ', vo.somoim_img);
+    	    			
+    	    			if (count % elementsPerRow === 0) {
+    	                    tag_vos += '<div class="row">';
+    	                }
+
+        				tag_vos += `
+
+        					<a href="som_selectOne.do?num=\${vo.num}"> <li>
+                            <div>
+                                <img src="resources/uploadimg/\${vo.somoim_img}" width="120"; height="120"; style="border-radius:150%; border: 1px lightgray solid;">
+                            </div>
+      						  <p>\${vo.som_title}</p>
+                      	    </li> </a>
+
+            			`;
+            			
+            			count++;
+
+            			if (count % elementsPerRow === 0) {
+                            tag_vos += '</div>'; //4개마다 </div>태그
+                        }
+
+        			});
+
+
+
+        			$('#img_somoim').html(tag_vos);
+        			
+        		},
+        		error : function(xhr, status, error){
+        			console.log('xhr.status : ', xhr.status);
+        		}
+        	});
+        }
+        
+        function somoimbyme_selectAll(){
+        	
+        	$.ajax({
+        		url : 'somoimbyme_selectAll.do',
+        		data : {
+        			user_id : '${user_id}'
+        		},
+        		success : function(vos) {
+        			console.log('ajax successed... somoimbyme : ', vos);
+        			
+        			let tag_vos = '';
+
+        			$.each(vos,function(index,vo){
+        				console.log(index,vo);
+    	    			console.log('somoim_img : ', vo.somoim_img);
+    	    			
+    	    			
+        				tag_vos += `
+
+        					<a href="som_selectOne.do?num=\${vo.num}"> <li>
+                            <div>
+                                <img src="resources/uploadimg/\${vo.somoim_img}" width="230"; height="230"; style="border-radius:150%; border: 1px lightgray solid;">
+                            </div>
+      						  <p>\${vo.som_title}</p>
+                      	    </li> </a>
+
+            			`;
+
+        			});
+
+					
+
+        			$('#img_somoim').html(tag_vos);
+        			
+        		},
+        		error : function(xhr,status,error){
+        			console.log('xhr.status:', xhr.status);
+        		}
+        	});
+        }
 
 
 
@@ -229,7 +324,7 @@
             </div>
         </div>
         <div class="mypage_center_sec">
-           <h2>나의 모임  <a href="som_selectAll.do"> <img src="resources/uploadimg/plus.png" style="width:15px; height:15px;"></a>  </h2>
+           <h2>나의 모임  <button type="button" onclick="som_selectAll()"> 더보기<img src="resources/uploadimg/plus.png" style="width:15px; height:15px;"></button></h2>
             <ul id="img_somoim" class="mypage_grid02">
 <!--                 <li> -->
 <!--                     <div class="mypage_moim_profile"> -->
@@ -244,11 +339,12 @@
 <!--                         <i class="fas fa-plus"></i> -->
 <!-- ​ -->
 <!--                     </div> -->
-<!--                    <a href="som_selectAll.do"><button type="button">새 모임 추가</button></a> -->
+                  
 <!--                    </li> -->
 ​
 ​
             </ul>
+             <button type="button" onclick="somoimbyme_selectAll()">내가 만든 소모임 보기</button>
         </div>
         <div class="mypage_bottom_sec">
             <h2>

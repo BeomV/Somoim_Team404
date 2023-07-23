@@ -127,7 +127,7 @@
                                 <button style="background-color: transparent;" type="submit">삭제하기</button>
                             </form>
                         </div>
-                        <div style="border: 1px solid gray; width:50%;" class="note_content">
+                        <div style="border-bottom: 1px solid gray; width:50%;" class="note_content">
                             \${mes_one.content}
                         </div>
                         <div style="width:30%">

@@ -1,15 +1,0 @@
-
-‡
-java:S1192"eDefine a constant instead of duplicating this literal "redirect:community_selectOne.do?num=" 3 times.(´…ù¾øÿÿÿÿ8·ˆ¸Æ”1
-n
-java:S1192"LDefine a constant instead of duplicating this literal "result...{}" 3 times.(™”—îùÿÿÿÿ8·ˆ¸Æ”1
-n	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(”Ïê÷úÿÿÿÿ8¸ˆ¸Æ”1
-j	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(››ë§8ºˆ¸Æ”1
-j
-java:S4488"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(æŞŠæúÿÿÿÿ8¼ˆ¸Æ”1
-o	java:S100#"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½±öÆûÿÿÿÿ8½ˆ¸Æ”1
-j
-java:S4488""HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(³·Áıÿÿÿÿ8½ˆ¸Æ”1
-j	java:S1003"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒ‡†8¾ˆ¸Æ”1
-e
-java:S44882"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(‹ªƒ8¿ˆ¸Æ”1

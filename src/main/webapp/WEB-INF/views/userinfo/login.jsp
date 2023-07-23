@@ -34,11 +34,11 @@
     <div class="login_section">
 
        <form action="loginOK.do" method="post" name="loginform" onsubmit="return check();">
-            
+
             <label for="user_id">아이디</label>
             <br>
             <input type="text" placeholder="아이디를 입력하세요." id="user_id" name="user_id" value="test111">
-            
+
             <br>
 
             <label for="user_pw">비밀번호</label>
@@ -57,13 +57,7 @@
         </form>
         	<p>${message}</p>
     </div>
-        
-<!-- 네이버 로그인 화면으로 이동 시키는 URL -->
-<!-- 네이버 로그인 화면에서 ID, PW를 올바르게 입력하면 callback 메소드 실행 요청 -->
-<div id="naver_id_login" style="text-align:center"><a href="${url}">
-<img width="223" src="resources/uploadimg/naver_login.png"/></a></div>
-<br>
-        
+
 
 <br>
 
@@ -81,7 +75,7 @@
             <ul>
                 <li>인스타그램</li>
                 <li>네이버 블로그</li>
-                
+
             </ul>
         </div>
         <div class="footer_company">
@@ -92,7 +86,7 @@
                 <li>주소: 서울시 강남구 태헤란로 ~~~~~</li>
             </ul>
         </div>
-       
+
     </div>
 </body>
 </html>

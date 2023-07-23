@@ -36,7 +36,7 @@
 
 	<insert id="Sch_INSERT">
         INSERT INTO somoim_schedule(num, schedule_date, schedule_time, schedule_title, place, money, max_participant,
-                                    som_member_num, somoim_num, participant, participant_count)
+                                    som_member_num, somoim_num, participant, participant_count,user_id)
         VALUES (seq_somoim_schedule.nextval,
                 #{schedule_date},
                 #{schedule_time},
@@ -47,7 +47,8 @@
                 (SELECT num FROM somoim_member WHERE user_id = #{user_id} and somoim_num = #{somoim_num}),
                 #{somoim_num},
                 #{participant},
-                1)
+                1,
+                #{user_id})
     </insert>
 
 	<select id="Sch_SELECT_PART"

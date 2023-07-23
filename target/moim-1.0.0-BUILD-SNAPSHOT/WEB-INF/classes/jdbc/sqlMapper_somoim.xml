@@ -15,6 +15,16 @@
 		select * from somoim where num = #{num}
 	</select>
 
+	<select id="SOMOIMBYME_SELECT_ALL"
+		resultType="test.com.moim.somoim.model.SomoimVO">
+		select * from somoim where somoim_master = #{user_id}
+	</select>
+
+	<select id="MYSOMOIM_SELECT_ALL"
+		resultType="test.com.moim.somoim.model.SomoimVO">
+		select * from somoim a join somoim_member b on a.num=b.somoim_num where user_id=#{user_id}
+	</select>
+
 	<select id="SELECT_MYPAGE"
 		resultType="test.com.moim.somoim.model.SomoimVO">
 		select * from somoim a join somoim_member b on

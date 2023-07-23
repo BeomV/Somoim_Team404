@@ -91,6 +91,7 @@ function kakaopay() {
         success: function(data) {
             var box = data.next_redirect_pc_url;
             window.open(box);
+            console.log(data);
 
         },
         error:function(xhr,status,error){

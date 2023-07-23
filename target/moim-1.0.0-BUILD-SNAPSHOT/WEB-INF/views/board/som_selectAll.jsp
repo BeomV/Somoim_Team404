@@ -24,7 +24,9 @@
             $("input[name='category']").on('click', function() {
                 console.log("onload...");
                 var category = $(this).val();
+                var clickedButton = $(this);
                 console.log($(this).val());
+
                 $.ajax({
                     url : 'somz_selectAll.do',
                     method:'GET',
@@ -34,8 +36,9 @@
                     success : function(data){
                         console.log('category', category);
                         console.log('data', data);
-
                         $('body').html(data);
+                        $("input[name='category']").removeClass('category_active'); // remove active class from all categories
+                        $("input[value='" + category + "']").addClass('category_active'); // add active class to clicked category
                         $('#paging').hide();
                     },
                     error : function(xhr, status, error){
@@ -49,7 +52,7 @@
 
             $("input[id='searchbutton']").on('click', function(){
             	console.log('클릭 감지!');
-            	$('#paging').hide();
+            	$('.paging').hide();
             });//end click
 
         });//end ready
@@ -231,7 +234,7 @@
 <%-- 					<c:if test="${paging.startPage != 1 }"> --%>
 <%-- 						<a href="som_selectAll.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a> --%>
 <%-- 					</c:if> --%>
-					<span id="paging">
+					<span>
 					<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 						<c:choose>
 							<c:when test="${p == paging.nowPage }">
@@ -239,6 +242,9 @@
 							</c:when>
 							<c:when test="${p != paging.nowPage }">
 								<a href="som_selectAll.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+							</c:when>
+							<c:when test="${paging.cntPerPage eq null }">
+								<a href="#"></a>
 							</c:when>
 						</c:choose>
 					</c:forEach>

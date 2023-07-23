@@ -126,7 +126,7 @@
     <div class="view_content">
         <ul class="view_grid">
             <c:forEach var="dto" items="${dtos}">
-            <li class="view_grid_li" style="padding-bottom: 50px;">
+            <li class="view_grid_li" style="padding-bottom: 50px; padding-right: 50px;">
                 <input type="hidden" value="${dto.boardVo.som_member_num}">
                 <a href="join_selectOne.do?num=${dto.boardVo.num}">
                     <input type="hidden" value="${dto.boardVo.somoim_num}">

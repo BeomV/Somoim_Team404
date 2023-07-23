@@ -354,7 +354,8 @@ public class BoardController {
     public String join_schedule(
             @RequestParam(defaultValue = "1") int pageNo,
             @RequestParam(defaultValue = "5") int pageSize,
-            Model model, Somoim_ScheduleVO vo) {
+            Model model, Somoim_ScheduleVO vo,
+            HttpServletRequest request) {
 
             int startRow = (pageNo - 1) * pageSize + 1;
             int endRow = pageNo * pageSize;
@@ -368,6 +369,7 @@ public class BoardController {
 
 
         log.info("join_schedule.do().....{}", vo);
+
 
         List<Somoim_ScheduleVO> vos = service.sch_selelctList(vo);
 
@@ -460,8 +462,12 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/join_schedule_insertOK.do", method = RequestMethod.POST)
-    public String join_schedule_insertOK(Somoim_ScheduleVO vo) {
+    public String join_schedule_insertOK(Somoim_ScheduleVO vo,HttpServletRequest request) {
         log.info("join_schedule_insertOK.do().....{}", vo);
+
+        String userId = (String) request.getSession().getAttribute("user_id");
+
+        vo.setUser_id(userId);
 
         int result = service.Sch_insert(vo);
 
@@ -608,6 +614,7 @@ public class BoardController {
         log.info("schedule_payment.do().....{}", vo);
 
 //        String userId = (String) request.getSession().getAttribute("user_id");
+
 
 
         log.info("세션 아이디" + vo.getSomoim_num());

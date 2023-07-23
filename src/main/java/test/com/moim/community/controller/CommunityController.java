@@ -13,6 +13,8 @@ import test.com.moim.community_comments.model.Community_commentsVO;
 import test.com.moim.community_comments.model.Community_re_commentsVO;
 import test.com.moim.community_comments.service.Community_commentsService;
 import test.com.moim.community_comments.service.Community_re_commentsService;
+import test.com.moim.userinfo.model.UserinfoVO;
+import test.com.moim.userinfo.service.UserinfoService;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -45,6 +47,9 @@ public class CommunityController {
 
     @Autowired
     Community_re_commentsService community_re_comservice;
+
+    @Autowired
+    UserinfoService userinfoService;
 
 
     @RequestMapping(value = "/community_selectAll.do", method = RequestMethod.GET)
@@ -83,8 +88,6 @@ public class CommunityController {
         for (CommunityVO info : infos) {
             if (vo2.getUser_id().equals(info.getUser_id())) {
                 vo2.setSave_name(info.getSave_name());
-
-
             }
         }
         log.info("프로필수정...{}", vo2);
@@ -101,19 +104,19 @@ public class CommunityController {
 
         for (Community_commentsVO com : ccoms) {
             for (CommunityVO info : infos) {
-                log.info("검사 vo 아이디...{}", com.getUser_id());
-                log.info("검사 info 저장된 이름...{}", info.getUser_id());
+//                log.info("검사 vo 아이디...{}", com.getUser_id());
+//                log.info("검사 info 저장된 이름...{}", info.getUser_id());
                 if (com.getUser_id().equals(info.getUser_id())) {
-                    log.info("vo2 저장된 아이디...{}", vo2.getUser_id());
-                    log.info("info 저장된 이름...{}", info.getUser_id());
-                    log.info("vo2 저장된 getSave_name...{}", vo2.getSave_name());
-                    log.info("info 저장된 getSave_name...{}", info.getSave_name());
+//                    log.info("vo2 저장된 아이디...{}", vo2.getUser_id());
+//                    log.info("info 저장된 이름...{}", info.getUser_id());
+//                    log.info("vo2 저장된 getSave_name...{}", vo2.getSave_name());
+//                    log.info("info 저장된 getSave_name...{}", info.getSave_name());
                     if (!com.getSave_name().equals(info.getSave_name())) {
-                        log.info("보드에 저장된 아이디...{}", vo2.getUser_id());
-                        log.info("보드에 저장된 이름...{}", vo2.getSave_name());
-                        log.info("처음 가입 이미지 이름...{}", info.getSave_name());
+//                        log.info("보드에 저장된 아이디...{}", vo2.getUser_id());
+//                        log.info("보드에 저장된 이름...{}", vo2.getSave_name());
+//                        log.info("처음 가입 이미지 이름...{}", info.getSave_name());
                         com.setSave_name(info.getSave_name());
-                        log.info("바뀐거 ::: vo2.getSave_name...{}", com.getSave_name());
+//                        log.info("바뀐거 ::: vo2.getSave_name...{}", com.getSave_name());
                     }
                 }
             }
@@ -156,11 +159,27 @@ public class CommunityController {
 
         model.addAttribute("c_coms", filteredcoms);
 
-        String user_id = (String) session.getAttribute("user_id");
+        // 1. 로그인 유저 PK 얻기.
+        int loginUserNum = (int) session.getAttribute("num");
 
-        vo.setUser_id(user_id);
+        // 2. 로그인 유저 PK로, 로그인 유저 정보 다 가져오기.
+        UserinfoVO loginUserInfo = new UserinfoVO();
+        loginUserInfo.setNum(loginUserNum);
+        loginUserInfo = userinfoService.selectOne(loginUserInfo);
+
+        // 3. 로그인 유저 정보를, 화면에 보여주게 설정.
+        log.info("user_id..{}", loginUserInfo.getUser_id());
+        log.info("save_name..{}", loginUserInfo.getSave_name());
+
+        model.addAttribute("loginUserInfo", loginUserInfo);
+
+        // 아래꺼 지우면 에러날수도있음.
+        vo.setUser_id(loginUserInfo.getUser_id());
+        vo.setSave_name(loginUserInfo.getSave_name());
+
+        // 좋아요 수?
         CommunityVO good_count_mem = service.select_all_goodList(vo);
-        log.info("user_id..{}", user_id);
+
         model.addAttribute("good_count_mem", good_count_mem);
         log.info("good_count_mem..{}", good_count_mem);
 

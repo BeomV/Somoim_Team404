@@ -41,12 +41,15 @@
                                 <button type="button" class="participant_cancle_btn" onclick="Participant_Cancle(this)">취소</button>
                             </span>
                         <span>
+
+                                <c:if test="${vo.user_id == user_id}">
                                 <button type="button">
                                     <a href="join_schedule_update.do?num=${vo.num}"><i class="fas fa-edit"></i></a>
                                 </button>
                                  <button type="button" onclick="join_schedule_deleteOK()">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
+                                </c:if>
                             </span>
 
                     </div>

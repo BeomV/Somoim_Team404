@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.github.scribejava.core.model.OAuth2AccessToken;
-
 import lombok.extern.slf4j.Slf4j;
 import test.com.moim.userinfo.service.UserinfoService;
 
@@ -53,26 +51,6 @@ public class UserinfoController {
 	@Autowired
 	HttpSession session;
 
-	@RequestMapping(value = "/u_selectAll.do", method = RequestMethod.GET)
-	public String u_selectAll(Model model) {
-		log.info("/u_selectAll.do");
-		List<UserinfoVO> vos = service.selectAll();
-
-		model.addAttribute("vos", vos);
-
-		return "userinfo/selectAll";
-	}
-
-	@RequestMapping(value = "/u_selectOne.do", method = RequestMethod.GET)
-	public String u_selectOne(UserinfoVO vo, Model model) {
-		log.info("/u_selectOne.do");
-
-		UserinfoVO vo2 = service.selectOne(vo);
-
-		model.addAttribute("vo2", vo2);
-
-		return "userinfo/selectOne";
-	}
 
 	@RequestMapping(value = "/u_insert.do", method = RequestMethod.GET)
 	public String u_insert() {
@@ -138,107 +116,19 @@ public class UserinfoController {
 
 
 //	// login
-//	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-//	public String login(String message, Model model) {
-//		log.info("/login.do....{}", message);
-//
-//		if (message != null)
-//			message = "아이디/비밀번호를 확인하세요";
-//		model.addAttribute("message", message);
-//
-//		return "userinfo/login";
-//	}
+	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
+	public String login(String message, Model model) {
+		log.info("/login.do....{}", message);
+
+		if (message != null)
+			message = "아이디/비밀번호를 확인하세요";
+		model.addAttribute("message", message);
+
+		return "userinfo/login";
+	}
 
 	// loginOK
 	
-	/* NaverLoginBO */
-    private NaverLoginBO naverLoginBO;
-    private String apiResult = null;
-
-    @Autowired
-    public void setNaverLoginBO(NaverLoginBO naverLoginBO) {
-        this.naverLoginBO = naverLoginBO;
-    }
-
-    // 로그인 첫 화면 요청 메소드
-    @RequestMapping(value = "/login.do", method = { RequestMethod.GET, RequestMethod.POST })
-    public String login(Model model, HttpSession session, String message) {
-        log.info("/login.do....{}", message);
-
-        /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
-        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-
-        // 네이버
-        model.addAttribute("url", naverAuthUrl);
-
-        if (message != null)
-            model.addAttribute("message", "아이디/비밀번호를 확인하세요");
-
-        return "userinfo/login";
-    }
-
-    // 네이버 로그인 성공시 callback 호출 메소드
-//    @RequestMapping(value = "/home.do", method = { RequestMethod.GET, RequestMethod.POST })
-//    public String home(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
-    // 새로운 URL로 변경
-    @RequestMapping(value = "/userhome.do", method = { RequestMethod.GET, RequestMethod.POST })
-    public String home(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
-   
-    log.info("/home.do....");
-
-
-        OAuth2AccessToken oauthToken;
-        oauthToken = naverLoginBO.getAccessToken(session, code, state);
- 
-        //1. 로그인 사용자 정보를 읽어온다.
-		apiResult = naverLoginBO.getUserProfile(oauthToken);  //String형식의 json데이터
-		log.info(apiResult);
-		
-		/** apiResult json 구조
-		{"resultcode":"00",
-		 "message":"success",
-		 "response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
-		**/
-		
-		//2. String형식인 apiResult를 json형태로 바꿈
-		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(apiResult);
-		JSONObject jsonObj = (JSONObject) obj;
-		
-		//3. 데이터 파싱 
-		//Top레벨 단계 _response 파싱
-	    // JSON 형태의 사용자 정보 파싱
-        JSONParser parser1 = new JSONParser();
-        JSONObject jsonObj1 = (JSONObject) parser1.parse(apiResult);
-        JSONObject responseObj = (JSONObject) jsonObj1.get("response");
-
-        String userId = (String) responseObj.get("user_id");
-        String email = (String) responseObj.get("email");
-        String birthday = (String) responseObj.get("birthday");
-        String name = (String) responseObj.get("name");
-
-        // 사용자 정보를 데이터베이스에 저장하기 위해 UserinfoVO 객체 생성
-        UserinfoVO userinfo = new UserinfoVO();
-        userinfo.setUser_id(userId);
-        userinfo.setEmail(email);
-        userinfo.setName(name);
-        
-
-        // 사용자 정보를 데이터베이스에 저장
-        int result = service.userhome(userinfo);
-        if (result != 1) {
-            // 저장에 실패한 경우 에러 처리
-            // 이 부분은 상황에 따라 적절한 처리를 해주어야 합니다.
-            log.error("Failed to insert user info to the database.");
-        }
-        // 모델에 user_id를 추가하여 뷰에서 사용할 수 있도록 함
-        model.addAttribute("user_id", userId);
-        model.addAttribute("result", apiResult);
-		return "userinfo/home";
-    }
-
-
-    
  @RequestMapping(value = "/loginOK.do", method = RequestMethod.POST)
   public String loginOK(UserinfoVO vo) {
  		log.info("/loginOK.do...{}", vo);
@@ -249,7 +139,9 @@ public class UserinfoController {
 		if (vo2 == null) {
 			return "redirect:login.do?message=fail";
 		} else {
-			session.setAttribute("user_id", vo2.getUser_id());
+			session.setAttribute("user_id", vo2.getUser_id()); // 기존에 주던거
+
+			session.setAttribute("num", vo2.getNum()); // PK 필요해서 추가.
 			return "redirect:home.do";
 		}
 
@@ -391,20 +283,20 @@ public class UserinfoController {
 			
 		}
 		
-		@ResponseBody
-		@RequestMapping(value = "VerifyRecaptcha", method = RequestMethod.POST)
-		public int VerifyRecaptcha(HttpServletRequest request) {
-		    VerifyRecaptcha.setSecretKey("시크릿 코드");
-		    String gRecaptchaResponse = request.getParameter("recaptcha");
-		    try {
-		       if(VerifyRecaptcha.verify(gRecaptchaResponse))
-		          return 0; // 성공
-		       else return 1; // 실패
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		        return -1; //에러
-		    }
-		}
+//		@ResponseBody
+//		@RequestMapping(value = "VerifyRecaptcha", method = RequestMethod.POST)
+//		public int VerifyRecaptcha(HttpServletRequest request) {
+//		    VerifyRecaptcha.setSecretKey("시크릿 코드");
+//		    String gRecaptchaResponse = request.getParameter("recaptcha");
+//		    try {
+//		       if(VerifyRecaptcha.verify(gRecaptchaResponse))
+//		          return 0; // 성공
+//		       else return 1; // 실패
+//		    } catch (Exception e) {
+//		        e.printStackTrace();
+//		        return -1; //에러
+//		    }
+//		}
 
 		
 		

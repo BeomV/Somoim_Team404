@@ -176,7 +176,7 @@
             </div>
             <div class="bbs_func">
                 <button type="button" onclick="showPopup()">
-                    <i class="fa-solid fa-lightbulb" style="color: red;"></i>
+<%--                    <i class="fa-solid fa-lightbulb" style="color: red;"></i>--%>
                 </button>
 
                     <%--                좋아요 파트--%>
@@ -199,6 +199,7 @@
                     </button>
                 </c:if>
                 <%--                좋아요 파트 끝--%>
+                <c:if test="${vo2.user_id == user_id}">
                 <button type="button">
                     <a href="join_update.do?num=${vo2.num}">
 
@@ -212,6 +213,7 @@
                     </a>
 
                 </button>
+                </c:if>
             </div>
         </div>
         <div class="content_text">
@@ -227,7 +229,7 @@
             </p>
             <div class="vote_one" style="width: 75%; margin: 0 auto;">
                 <h2 style="margin-bottom: 20px;">
-                    투표 제목 : <c:out value="${qvo2.question}"/>
+                    <c:out value="${qvo2.question}"/>
                 </h2>
                 <c:forEach items="${ch_vo2}" var="ch_vo2">
                     <ul class="vote_grid">

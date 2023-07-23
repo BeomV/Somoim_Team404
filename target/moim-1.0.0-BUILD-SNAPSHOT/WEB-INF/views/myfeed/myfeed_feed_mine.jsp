@@ -22,41 +22,48 @@
     });
     
     function myfeed_update() {
-    	console.log('눌렀다!');
-    	
-    	//li 태그 가져오기
-    	let liElement = document.getElementById("letmeintroduce");
-    	//input 태그 생성
-    	let inputElement = document.createElement("input");
-    	//input type="text"
-    	inputElement.type="text";
-    	inputElement.value=liElement.innerText;
-    	
-    	//li <-> input
-    	liElement.parentNode.replaceChild(inputElement, liElement);
-    	
+        console.log('눌렀다!');
 
-		$("#updatebutton").show();
-    	
-    	
+        // li 태그 가져오기
+        let liElement = document.getElementById("letmeintroduce");
+        // input 태그 생성
+        let inputElement = document.createElement("input");
+        // input type="text"
+        inputElement.type = "text";
+        inputElement.value = liElement.innerText;
+        inputElement.id = "introduce";
+
+        // li <-> input
+        liElement.parentNode.replaceChild(inputElement, liElement);
+        let inputValue = document.getElementById("introduce");
+
+        $("#updatebutton").show();
+
     }
-    
-    
-    
+
     function myfeed_updateOK() {
-    	console.log('눌렸다');
-    	$.ajax({
-    		url : 'myfeed_feedupdate.do',
-    		data : {
-    			user_id : '${param.user_id}'
-    		},
-    		success : function(response) {
-    			console.log('ajax successed...:', response);
-    		},
-    		error : function(xhr, status, error){
-    			console.log('xhr.status : ', xhr.status);
-    		}
-    	});
+        console.log('눌렸다');
+
+        // Get the updated self-introduction from the input field
+        let updatedIntroduce = $('#introduce').val();
+
+        // Send the AJAX request to update the self-introduction
+        $.ajax({
+            url: 'myfeed_feedupdate.do',
+            data: {
+                user_id: '${param.user_id}',
+                introduce: updatedIntroduce
+            },
+            success: function(response) {
+                console.log('ajax successed...:', response);
+                // If the update is successful, update the display on the page
+                $('#letmeintroduce').text(updatedIntroduce);
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.log('xhr.status : ', xhr.status);
+            }
+        });
     }
     
     </script>
@@ -86,7 +93,7 @@
                 <div class="top_follow" id="feed_mine">
                     <button type="button" style="padding: 5px 12px;" onclick="myfeed_update()">수정하기</button>
                     <button type="button" style="padding: 5px 12px;">사진추가</button>
-                    <button type="button" style="padding: 5px 12px;">포인트샵</button>           
+                    <button type="button" style="padding: 5px 12px;"><a href="point_selectAll.do" style="color:white;">포인트샵</a></button>           
                 </div>
                 <div class="top_follow" id="feed_notmine">
                     <button type="button" style="padding: 5px 12px;">팔로우 하기</button>
