@@ -14,7 +14,6 @@
 </head>
 <body>
 <jsp:include page="../top_menu.jsp"></jsp:include>
-
 <div class="point_category">
     <a class="point_acitve" id="point_payment">유료결제</a>
     <a>포인트</a>
@@ -36,7 +35,6 @@
             </c:if>
         </c:forEach>
     </ul>
-
     <ul class="point_somoim">
         <strong>내 피드</strong>
         <br>
@@ -52,7 +50,6 @@
             </c:if>
         </c:forEach>
     </ul>
-
     <ul class="point_somoim">
         <strong>유저 관리</strong>
         <br>
@@ -68,9 +65,7 @@
             </c:if>
         </c:forEach>
     </ul>
-
 </div>
-
 <div class="point_list2">
     <ul class="point_somoim">
         <strong>소모임</strong>
@@ -87,7 +82,6 @@
             </c:if>
         </c:forEach>
     </ul>
-
     <ul class="point_somoim">
         <strong>내 피드</strong>
         <br>
@@ -103,7 +97,6 @@
             </c:if>
         </c:forEach>
     </ul>
-
     <ul class="point_somoim">
         <strong>유저 관리</strong>
         <br>
@@ -120,33 +113,25 @@
         </c:forEach>
     </ul>
 </div>
-
 <div class="premium_section" style="border-top: #ccc solid 1px;">
     <i class="fa-solid fa-crown"></i>
     <strong>프리미엄 회원권</strong>
     <div class="point_main_title">
         "이런 분들에게 추천해요!"
     </div>
-
     <div class="point_sub_title">
         제한 없이 모임을 만들고 <strong>소모임을</strong> 즐기고 싶은 분
     </div>
-
     <div class="premium_item_list">
         <a>1. 모임 이름 변경 1회 무료</a>
         <a>2. 모임 인원수 제한 해제</a>
         <a>3. 매달 소정의 모임 증정품 제공!</a>
         <a>4. 소모임에서 제공하는 '장소' 무료 대여 (연3회)</a>
-
-
     </div>
     <div class="premium_button_sec">
         <button type="button"> 프리미엄 회원권 구매하기</button>
     </div>
-
 </div>
-
-
 <div class="footer">
     <div>
         <strong>온앤오프</strong>
@@ -161,7 +146,6 @@
         <ul>
             <li>인스타그램</li>
             <li>네이버 블로그</li>
-
         </ul>
     </div>
     <div class="footer_company">
@@ -172,16 +156,12 @@
             <li>주소: 서울시 강남구 태헤란로 ~~~~~</li>
         </ul>
     </div>
-
 </div>
 <c:if test="${not empty point}">
     <script>
         alert("${point}");
     </script>
 </c:if>
-
 </body>
 <script src="/resources/js/point.js"></script>
-
-
 </html>

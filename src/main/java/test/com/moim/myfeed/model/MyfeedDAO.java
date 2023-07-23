@@ -10,5 +10,4 @@ public interface MyfeedDAO {
 
 	public int imginsert(MyfeedVO vo);
 
-//	public List<MyfeedVO> selectList(MyfeedVO vo4);
 }
