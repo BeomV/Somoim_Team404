@@ -45,6 +45,18 @@ public class SomoimRestController {
         log.info("SomoimVO..{}", jsonsomoim);
         return jsonsomoim;
     }
+    
+	@ResponseBody
+	@RequestMapping(value = "/somtitleCheck.do", method = RequestMethod.GET)
+	  public int somtitleCheck(String som_title){
+			log.info("넘어온 som_title : {}", som_title);
+	    	
+	    	SomoimVO vo = service.somtitleCheck(som_title);
+	    	if(vo==null) {
+	    		return 1;
+	    	} else
+	    		return 0;
+	    }
 
     @ResponseBody
     @RequestMapping(value = "/mysomoim_selectAll.do", method = RequestMethod.GET)

@@ -62,6 +62,7 @@ public class SomoimController {
 
 		return "board/som_selectAll2";
 	}
+	
 
 	@RequestMapping(value = "/som_selectOne.do", method = RequestMethod.GET)
 	public String som_selectOne(SomoimVO vo, Model model) {

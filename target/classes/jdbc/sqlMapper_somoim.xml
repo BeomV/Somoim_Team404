@@ -49,6 +49,11 @@
 		select * from somoim where som_title like #{searchWord} order by num desc
 	</select>
 
+	<select id="SOMOIMTITLE_CHECK"
+		resultType="test.com.moim.somoim.model.SomoimVO">
+		select * from somoim where som_title = #{som_title}
+	</select>
+
 	<select id="SOMOIM_SEARCH_LIST_AREA"
 		resultType="test.com.moim.somoim.model.SomoimVO"
 		parameterType="HashMap">

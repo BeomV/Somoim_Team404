@@ -15,6 +15,44 @@
 <script src="resources/js/board.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
+<script type="text/javascript">
+
+$(function(){
+	console.log('onload....');
+	
+	
+	$("#moim_btn").on("click", function(e){
+		e.preventDefault();
+		
+		console.log('버튼 눌림');
+		var som_title = $("#som_title").val();
+		console.log(som_title);
+		
+		$.ajax({
+			url : 'somtitleCheck.do',
+			data : {
+				som_title : som_title
+			},
+			success : function(result) {
+				console.log('result : ', result);
+				if(result==1) {
+					console.log('중복이 아닙니다.');
+					$("#moim_btn").unbind('click').click();
+				} else {
+					console.log('같은 이름의 소모임이 이미 존재합니다.');
+					alert('같은 이름의 소모임이 이미 존재합니다.');
+				}
+			},
+			error : function(xhr, status, error){
+				console.log('xhr.status : ', xhr.status);
+			}
+		});
+		
+	});
+});
+
+</script>
+
 
 </head>
 <body>
