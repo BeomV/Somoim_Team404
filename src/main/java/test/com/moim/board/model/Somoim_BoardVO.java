@@ -3,6 +3,7 @@ package test.com.moim.board.model;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Data
@@ -12,7 +13,7 @@ public class Somoim_BoardVO{
     private String title;
     private  String content;
     private String save_image;
-    private Timestamp write_date;
+    private Date write_date;
     private int view_count;
     private int good_count;
     private int vote_num;

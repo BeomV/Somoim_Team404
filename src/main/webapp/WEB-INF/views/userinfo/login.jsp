@@ -37,13 +37,13 @@
 
             <label for="user_id">아이디</label>
             <br>
-            <input type="text" placeholder="아이디를 입력하세요." id="user_id" name="user_id" value="test111">
+            <input type="text" placeholder="아이디를 입력하세요." id="user_id" name="user_id" placeholder="아이디를 입력하세요.">
 
             <br>
 
             <label for="user_pw">비밀번호</label>
             <br>
-            <input type="password" placeholder="비밀번호를 입력하세요." id="user_pw" name="pw" value="1234">
+            <input type="password" placeholder="비밀번호를 입력하세요." id="user_pw" name="pw" placeholder="비밀번호를 입력하세요.">
             <br>
             <div class="sub_login">
       

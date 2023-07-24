@@ -57,7 +57,6 @@
 .liked_board {
   background-color: white;
   padding: 0;
-  height: 220px;
   display: flex;
   flex-direction: column;
 }
@@ -78,8 +77,6 @@
 
 .liked_board .board_profile_info {
   background-color: white;
-  display: flex;
-  flex-direction: row;
   border-radius: 10px;
   border-color: lightgray;
 }
@@ -131,9 +128,10 @@
 
 
 .liked_board .board_profile_info .info_item2 .vertical_info {
-  display: flex;
   flex-direction: column;
+  margin-left: 1%;
   gap: 10px;
+  width: 700px;
 }
 
 .photo_list {

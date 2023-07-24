@@ -10,10 +10,10 @@ import test.com.moim.myfeed.model.MyfeedVO;
 @Slf4j
 @Service
 public class MyfeedService {
-	
+
 	@Autowired
 	MyfeedDAO dao;
-	
+
 
 	public int update(MyfeedVO vo) {
 		log.info("myfeed_update....{}", vo.getUser_id());

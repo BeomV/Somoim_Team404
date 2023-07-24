@@ -19,7 +19,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var currentPage = 1; // 시작 페이지 번호
-        var itemsPerPage = 3; //표시 항목 수
+        var itemsPerPage = 3; // 표시 항목 수
 
         $(".more_but").click(function () {
             currentPage++; // 페이지 번호 증가
@@ -27,13 +27,12 @@
         });
 
         function loadMoreItems() {
-
             var somoim_num = "${param.somoim_num}";
             var url = "/json_join_selectAll.do?somoim_num=" + somoim_num;
             $.ajax({
                 url: url, // json 목록 가져오기
                 method: "GET",
-                data: {page: currentPage, itemsPerPage: itemsPerPage},
+                data: { page: currentPage, itemsPerPage: itemsPerPage },
                 dataType: "json",
                 success: function (response) {
                     console.log("ajax on");
@@ -61,6 +60,18 @@
                         var vo = items[i];
                         console.log("vo[i]...{}", vo);
                         console.log("vouser_id...{}", vo.user_id);
+
+                        // Unix timestamp를 Date 객체로 변환
+                        const date = new Date(vo.write_date);
+
+                        // 날짜를 한국 시간대로 변환하여 "yyyy.MM.dd" 형식으로 표시
+                        const formattedDate = date.toLocaleString("ko-KR", {
+                            timeZone: "Asia/Seoul",
+                            year: "numeric",
+                            month: "2-digit",
+                            day: "2-digit",
+                        });
+
                         html += '<li>';
                         html += '    <input type="hidden" value="' + vo.som_member_num + '">';
                         html += '    <a href="join_selectOne.do?num=' + vo.num + '">';
@@ -72,7 +83,7 @@
                         html += '                </div>';
                         html += '                <span>';
                         html += '                    <strong>' + vo.user_id + '</strong>  <div><i style="color: red" class="far fa-heart">' + vo.good_count + '</i></div>';
-                        html += '                    <p>' + vo.write_date + '</p>';
+                        html += '                    <p>' + formattedDate + '</p>'; // 변환된 날짜 출력
                         html += '                </span>';
                         html += '            </div>';
                         html += '            <div class="bbs_func">';
@@ -117,7 +128,7 @@
     <jsp:include page="./som_top_menu.jsp"></jsp:include>
     <div class="img_info">
 
-        <img style="width: 100%; height: 100%;" src="resources/uploadimg/${somoim_top_pic.somoim_img}">
+        <img style="width: 100%;" src="resources/uploadimg/${somoim_top_pic.somoim_img}">
 
     </div>
     <div class="top_func">

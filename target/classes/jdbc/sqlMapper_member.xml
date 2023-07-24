@@ -46,8 +46,7 @@
 		values(seq_somoim_member.nextval,#{user_id},#{som_title},#{save_name},#{num})
 	</insert>
 	
-	<delete id="MEMBER_DELETE">
-		delete from somoim_member where num = #{num}
-	</delete>
 
+<delete id="MEMBER_DELETE">
+delete from somoim_member where som_title=#{som_title, jdbcType=VARCHAR} and user_id=#{user_id} </delete>
 </mapper>

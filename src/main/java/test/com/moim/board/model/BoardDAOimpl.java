@@ -217,5 +217,10 @@ public class BoardDAOimpl implements BoardDAO{
 		return sqlSession.selectList("MYPAGE_LIKEDBOARD", vo);
 	}
 
+    @Override
+    public Somoim_BoardVO LOGIN_ID_PROFILE(Somoim_BoardVO vo) {
+        return sqlSession.selectOne("LOGIN_ID_PROFILE", vo);
+    }
+
 
 }

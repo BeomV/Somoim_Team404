@@ -246,6 +246,7 @@ nav > ul > li{
     height: 200px;
     display: flex;
     align-items: center;
+    overflow: hidden;
 }
 
 .moim_list01 ul div:last-child{

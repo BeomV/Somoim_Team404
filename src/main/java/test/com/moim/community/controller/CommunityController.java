@@ -99,6 +99,7 @@ public class CommunityController {
         vo3.setBoard_num(vo2.getNum());
         /*vo3.setSave_name(vo2.getSave_name());*/
         System.out.println("vo2.getNum!!!!!!!!!!!!:" + vo2.getNum());
+        log.info("vo3..{}", vo3);
         List<Community_commentsVO> ccoms = community_comservice.selectAll(vo3);
 
 
@@ -146,7 +147,7 @@ public class CommunityController {
 
         Community_re_commentsVO c_cvo = new Community_re_commentsVO();
         c_cvo.setBoard_num(vo3.getBoard_num());
-        log.info("vo3.getnum..{}", vo3.getNum());
+//        log.info("vo3.getnum..{}", vo3.getNum());
         List<Community_re_commentsVO> filteredcoms = new ArrayList<>();
         List<Community_re_commentsVO> c_coms = new ArrayList<Community_re_commentsVO>();
         c_coms = community_re_comservice.selectAll(c_cvo);
@@ -160,24 +161,39 @@ public class CommunityController {
         model.addAttribute("c_coms", filteredcoms);
 
         // 1. 로그인 유저 PK 얻기.
-        int loginUserNum = (int) session.getAttribute("num");
+//        int loginUserNum = (int)session.getAttribute("num");
+//
+//        log.info("loginUserNum...{}",loginUserNum );
+//
+////        수정 부분
+//        // 2. 로그인 유저 PK로, 로그인 유저 정보 다 가져오기.
+//        UserinfoVO loginUserInfo = new UserinfoVO();
+//        loginUserInfo.setNum(loginUserNum);
+//        loginUserInfo = userinfoService.selectOne(loginUserInfo);
+//
+//        // 3. 로그인 유저 정보를, 화면에 보여주게 설정.
+//        log.info("user_id..{}", loginUserInfo.getUser_id());
+//        log.info("save_name..{}", loginUserInfo.getSave_name());
+//
+//        model.addAttribute("loginUserInfo", loginUserInfo);
+//        //        수정 부분
 
-        // 2. 로그인 유저 PK로, 로그인 유저 정보 다 가져오기.
-        UserinfoVO loginUserInfo = new UserinfoVO();
-        loginUserInfo.setNum(loginUserNum);
-        loginUserInfo = userinfoService.selectOne(loginUserInfo);
+//        // 아래꺼 지우면 에러날수도있음.
+//        vo.setUser_id(loginUserInfo.getUser_id());
+//        vo.setSave_name(loginUserInfo.getSave_name());
 
-        // 3. 로그인 유저 정보를, 화면에 보여주게 설정.
-        log.info("user_id..{}", loginUserInfo.getUser_id());
-        log.info("save_name..{}", loginUserInfo.getSave_name());
+        String id = (String) session.getAttribute("user_id");
+        log.info("user_id ★★★★★★ ...{}", id);
+        UserinfoVO User_id_ses = new UserinfoVO();
+        User_id_ses.setUser_id(id);
 
-        model.addAttribute("loginUserInfo", loginUserInfo);
+        UserinfoVO User_id_sesession = service.user_list(User_id_ses);
+        log.info("User_id_sesession...{}",User_id_sesession );
+        model.addAttribute("loginUserInfo", User_id_sesession);
 
-        // 아래꺼 지우면 에러날수도있음.
-        vo.setUser_id(loginUserInfo.getUser_id());
-        vo.setSave_name(loginUserInfo.getSave_name());
+        log.info("!!!vo!!!!..{}", vo);
 
-        // 좋아요 수?
+        vo.setUser_id((String)session.getAttribute("user_id"));
         CommunityVO good_count_mem = service.select_all_goodList(vo);
 
         model.addAttribute("good_count_mem", good_count_mem);

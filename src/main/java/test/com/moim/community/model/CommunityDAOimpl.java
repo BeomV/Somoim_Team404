@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import test.com.moim.userinfo.model.UserinfoVO;
 
 import java.util.List;
 
@@ -105,6 +106,12 @@ public class CommunityDAOimpl implements CommunityDAO{
 	@Override
 	public List<CommunityVO> mypageMyactivity_good(CommunityVO vo) {
 		return sqlSession.selectList("MYPAGE_GOOD", vo);
+	}
+
+
+	@Override
+	public UserinfoVO user_list(UserinfoVO vo) {
+		return sqlSession.selectOne("ELEMENTS_IN_USERINFO", vo);
 	}
 
 }

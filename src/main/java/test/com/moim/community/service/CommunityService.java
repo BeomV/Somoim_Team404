@@ -10,6 +10,7 @@ import test.com.moim.board.model.Somoim_BoardVO;
 import test.com.moim.community.model.CommunityDAO;
 import test.com.moim.community.model.CommunityVO;
 import test.com.moim.somoim.model.SomoimVO;
+import test.com.moim.userinfo.model.UserinfoVO;
 
 @Service
 @Slf4j
@@ -71,5 +72,9 @@ public class CommunityService {
     public void del_good_count_list(CommunityVO vo){
         log.info("완료...{}", vo);
         dao.del_good_count_list(vo);
+    }
+
+    public UserinfoVO user_list(UserinfoVO vo) {
+        return dao.user_list(vo);
     }
 }

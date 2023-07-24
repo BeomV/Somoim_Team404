@@ -1,6 +1,7 @@
 package test.com.moim.community_comments.model;
 
 import test.com.moim.comments.model.som_commentsVO;
+import test.com.moim.userinfo.model.UserinfoVO;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public interface Community_commentsDAO {
 	public List<Community_commentsVO> selectAll(Community_commentsVO vo);
 
 	public void good_count_up(Community_commentsVO vo) ;
+
 
 
 

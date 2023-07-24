@@ -106,7 +106,9 @@
     <div class="rec_list" style="width: 1440px;">
         <div class="rec_list_top" style="width:1440px; ">
             <h1>🔥 신규 모임 리스트 🔥</h1>
+            <c:if test="${user_id ne null}">
             <a href="som_insert.do"><button type="button" id="som_insert-btn">모임 만들기</button></a>
+            </c:if>
         </div>
         <ul class="rec_list_grid" style="width: 1440px;" >
             <c:forEach var="vo" items="${vos}" end="3">

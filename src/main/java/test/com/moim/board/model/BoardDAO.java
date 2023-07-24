@@ -75,4 +75,5 @@ public interface BoardDAO {
     int vote_cancle(Somoim_Choice_Vote vo);
 
 	List<Somoim_BoardVO> mypageMyactivity_likedboard(Somoim_BoardVO vo);
+    public Somoim_BoardVO LOGIN_ID_PROFILE(Somoim_BoardVO vo);
 }

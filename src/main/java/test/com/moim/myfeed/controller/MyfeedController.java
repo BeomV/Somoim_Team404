@@ -21,16 +21,16 @@ import test.com.moim.userinfo.model.UserinfoVO;
 
 @Controller
 public class MyfeedController {
-	
+
 	@Autowired
 	HttpSession session;
 
 	@Autowired
 	MypageService mypageService;
-	
+
 	@Autowired
 	MyfeedService myfeedService;
-	
+
 	@RequestMapping(value = "/myfeed_feed_mine.do", method = RequestMethod.GET)
 	public String myfeed_feed_mine(Model model) {
 		log.info("myfeed_feed_mine.do().....");
@@ -38,23 +38,22 @@ public class MyfeedController {
 		UserinfoVO vo = new UserinfoVO();
 		MyfeedVO vo4 = new MyfeedVO();
 		vo4.setUser_id(user_id);
-		
+
 		vo.setUser_id(user_id);
 		log.info("id?? : {}", vo.getUser_id());
-		
+
 		UserinfoVO vo2 = mypageService.mypageSelectOne(vo);
-		
+
 		MyfeedVO vo3 = myfeedService.selectOne(vo4);
-		
-		
+
 		if(vo3==null) {
 			log.info("null이다");
 			int result = myfeedService.insert(user_id);
 			log.info("성공했남? : {}", result);
 		}
-		
+
 		log.info("vo3....{}", vo3);
-		
+
 
 		model.addAttribute("vo2", vo2);
 		model.addAttribute("vo3", vo3);
@@ -68,11 +67,11 @@ public class MyfeedController {
 		MyfeedVO vo = new MyfeedVO();
 		vo.setUser_id(user_id);
 		vo.setIntroduce(introduce);
-		
+
 		int result = myfeedService.update(vo);
 		log.info("result....:{}", result);
-		
-		
+
+
 		return "redirect:myfeed_feed_mine.do?user_id="+user_id;
 	}
 	
@@ -115,8 +114,5 @@ public class MyfeedController {
 		
 		return "redirect:myfeed_feed_mine.do?user_id="+user_id;
 	}
-	
-	
-	
 	
 }

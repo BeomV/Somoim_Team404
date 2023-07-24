@@ -1,5 +1,6 @@
 package test.com.moim.somoim.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -13,7 +14,7 @@ public class SomoimVO {
 	private String som_title;
 	private String category;
 	private int max_member;
-	private Timestamp create_date;
+	private Date create_date;
 	private String area;
 	private String som_content;
 	private String somoim_img;

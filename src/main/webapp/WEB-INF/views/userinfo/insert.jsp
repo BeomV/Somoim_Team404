@@ -84,60 +84,75 @@
             var email = $("input[name='email']").val();
             localStorage.setItem("email", email);
         }
-        
-        function check(){
-      	  if(insertform.user_id.value.length == 0){
-      		  alert("아이디가 누락되었습니다.");
-      		  insertform.user_id.focus();
-      		  return false;
-      	  }
-      	  if(insertform.pw.value.length == 0){
-      		  alert("비밀번호가 누락되었습니다.");
-      		  insertform.pw.focus();
-      		  return false;
-      	  }
-      	  if(insertform.pw_check.value.length == 0){
-      		  alert("비밀번호 재입력이 누락되었습니다.");
-      		  insertform.pw_check.focus();
-      		  return false;
-      	  }
-      	  if(insertform.name.value.length == 0){
-      		  alert("이름이 누락되었습니다.");
-      		  insertform.name.focus();
-      		  return false;
-      	  }
-      	  if(insertform.email.value.length == 0){
-      		  alert("이메일이 누락되었습니다.");
-      		  insertform.email.focus();
-      		  return false;
-      	  }
-      	  if(insertform.email_token.value.length == 0){
-      		  alert("인증번호가 누락되었습니다.");
-      		  insertform.email_token.focus();
-      		  return false;
-      	  }
-      	  if(sessionStorage.getItem("email_ok")!=="OK"){
-      		  alert("인증 누락되었습니다.");
-      		  return false;
-      	  }
-      	  
 
-          // 비밀번호와 사용자 아이디를 가져옴
-          var pw = $("input[name='pw']").val();
-          var pw_check = $("input[name='pw_check']").val();
+        function check() {
+            // 중복 체크 결과 메시지를 가져옴
+            var message = $("#resultMessage").text();
 
-          // 비밀번호와 사용자 아이디 비교
-          if (pw !== pw_check) {
-              alert("비밀번호와 비밀번호 확인이 같지 않습니다. 확인해주세요.");
-              return false; // 회원가입 중지
-          }
+            if (message !== '생성 가능한 아이디입니다.') {
+                alert('아이디 중복 체크를 해주세요.');
+                return false;
+            }
 
-      	             
-      	  $("#register").click(function() {
-              // 회원가입 버튼을 클릭할 때 로그인 창으로 이동
-              window.location.href = 'login.jsp'; // 로그인 페이지 URL로 변경해야 합니다.
-              sessionStorage.setItem("email_ok","");
-          });
+            if (insertform.user_id.value.length === 0) {
+                alert("아이디가 누락되었습니다.");
+                insertform.user_id.focus();
+                return false;
+            }
+
+            if (insertform.pw.value.length === 0) {
+                alert("비밀번호가 누락되었습니다.");
+                insertform.pw.focus();
+                return false;
+            }
+
+            if (insertform.pw_check.value.length === 0) {
+                alert("비밀번호 재입력이 누락되었습니다.");
+                insertform.pw_check.focus();
+                return false;
+            }
+
+            if (insertform.name.value.length === 0) {
+                alert("이름이 누락되었습니다.");
+                insertform.name.focus();
+                return false;
+            }
+
+            if (insertform.email.value.length === 0) {
+                alert("이메일이 누락되었습니다.");
+                insertform.email.focus();
+                return false;
+            }
+
+            if (insertform.email_token.value.length === 0) {
+                alert("인증번호가 누락되었습니다.");
+                insertform.email_token.focus();
+                return false;
+            }
+
+            if (sessionStorage.getItem("email_ok") !== "OK") {
+                alert("인증 누락되었습니다.");
+                return false;
+            }
+
+            // 비밀번호와 사용자 아이디를 가져옴
+            var pw = $("input[name='pw']").val();
+            var pw_check = $("input[name='pw_check']").val();
+
+            // 비밀번호와 사용자 아이디 비교
+            if (pw !== pw_check) {
+                alert("비밀번호와 비밀번호 확인이 같지 않습니다. 확인해주세요.");
+                return false; // 회원가입 중지
+            }
+
+            $("#register").click(function () {
+                // 회원가입 버튼을 클릭할 때 로그인 창으로 이동
+                window.location.href = 'login.jsp'; // 로그인 페이지 URL로 변경해야 합니다.
+                sessionStorage.setItem("email_ok", "");
+            });
+
+            // 회원가입 폼 제출
+            return true;
         }
         
         
@@ -190,14 +205,58 @@
 
 
         </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#checkButton").click(function () {
+                var username = $("#user_id").val();
+
+                // 아이디가 비어있는지 확인
+                if (username.trim() === '') {
+                    $("#resultMessage").text('아이디를 입력해주세요.');
+                    return;
+                }
+
+                // Ajax 호출
+                $.ajax({
+                    url: 'json_m_idCheck.do',
+                    method: 'GET',
+                    data: { user_id: username },
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response);
+
+                        // 서버에서 반환된 JSON 데이터의 result 값을 확인하여 메시지 출력
+                        if (response.result === 'Ok') {
+                            $("#resultMessage").text('생성 가능한 아이디입니다.');
+                        } else if (response.result === 'NotOK') {
+                            $("#resultMessage").text('이미 생성된 아이디가 있습니다.');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('xhr.status : ', xhr.status);
+                        $("#resultMessage").text('아이디를 입력해주세요.');
+                    }
+                });
+            });
+        });
+    </script>
+
 </head>
 <body>
 <%@ include file="../top_menu.jsp" %>
 <div class="register_section">
-    <form action="u_insertOK.do" method="post" enctype="multipart/form-data" name="insertform" >
+
+
+    <form action="u_insertOK.do" method="post" enctype="multipart/form-data" name="insertform">
         <label for="user_id">아이디</label>
         <br>
-        <input type="text" placeholder="아이디를 입력하세요." name="user_id" id="user_id" >
+        <input type="text" placeholder="아이디를 입력하세요." name="user_id" id="user_id">
+        <div style="align-items: center; display: flex;">
+        <button style="width:30%; height: 1%;" type="button" id="checkButton">아이디 중복 체크</button>
+        <div id="resultMessage"></div>
+        </div>
         <br>
         <label for="user_pw">비밀번호</label>
         <br>
@@ -273,7 +332,7 @@
             <button id="btn_email_token"   >확인</button>
         </div>
         <br>
-        <input id="register" type="submit" onClick="return check()"  value="회원가입">
+        <button id="register" type="submit" onClick="return check()"  value="회원가입">회원가입</button>
     </form>
 </div>
 <div class="footer">

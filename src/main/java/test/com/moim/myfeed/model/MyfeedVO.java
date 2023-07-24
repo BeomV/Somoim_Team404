@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class MyfeedVO {
-	
+
 	private int num;
 	private String user_id;
 	private String save_name;

@@ -17,65 +17,71 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script type="text/javascript">
-    
-    $(function(){
-    	console.log('onload........');
-    	
-    	$.ajax({
-    		url:'Rest_Mypage_myactivity_boardbyme.do',
-    		data: {
-        		user_id:'${param.user_id}'
-        	},
-    		success: function(vos){
-    			console.log('response.......:{}', vos);
-    			console.log('성공?');
-    			
-    			let tag_vos = '';
-    			
-    			$.each(vos, function(index, vo){
-    				console.log(index, vo);
-    				let content = vo.content; // vo.content 값을 변수에 저장
 
-                    // content가 null이면 "게시글 내용이 없습니다." 출력
-                    if (content === null) {
-                        content = "==게시글 내용이 없습니다.==";
-                    }
-    				
-    				tag_vos += `
-    				
-    					 <li>
-    			        <div class="liked_board">
-    			          <ul class="board_profile_info" >
-        				
-    					<li class="info_item1">
+	$(function() {
+		console.log('onload........');
 
-    		              
-    		            </li>
-    		        <a href="join_selectOne.do?num=\${vo.num}">  <li class="info_item2">
-    		              <div class="vertical_info">
-    		                \${vo.user_id}
-    		                <p style="font-size: 0.2rem;">\${vo.write_date}</p>
-    		                \${vo.title}<br>
-    		                \${content}<br>
-    		               
-    		              </div></a>
-    		            </li>
-    		            </ul>
-    		            </div>
-    		            </li>
-    				
-    				`;
-    				
-    			});
-    			$('#boardbyme').html(tag_vos);
-    			
-    		},
-    		error : function(xhr, status, error){
-    			console.log('xhr.status : ', xhr.status);
-    		}
-    	});
-    });
-    
+		$.ajax({
+			url: 'Rest_Mypage_myactivity_boardbyme.do',
+			data: {
+				user_id: '${param.user_id}'
+			},
+			success: function(vos) {
+				console.log('response.......:', vos);
+				console.log('성공?');
+
+				let tag_vos = '';
+
+				$.each(vos, function(index, vo) {
+					console.log(index, vo);
+					let content = vo.content; // vo.content 값을 변수에 저장
+
+					// content가 null이면 "게시글 내용이 없습니다." 출력
+					if (content === null) {
+						content = "==게시글 내용이 없습니다.==";
+					}
+
+					// Unix timestamp를 Date 객체로 변환
+					const date = new Date(vo.write_date);
+
+					// 날짜를 한국 시간대로 변환하여 "yyyy.MM.dd" 형식으로 표시
+					const formattedDate = date.toLocaleString("ko-KR", {
+						timeZone: "Asia/Seoul",
+						year: "numeric",
+						month: "2-digit",
+						day: "2-digit",
+					});
+
+					tag_vos += `
+          <li>
+            <div class="liked_board">
+              <ul class="board_profile_info">
+                <li>
+                  <a href="join_selectOne.do?num=\${vo.num}">
+                    <li class="info_item2">
+                      <div class="vertical_info">
+                        \${vo.user_id}
+                        <p style="font-size: 0.2rem;">\${formattedDate}</p>
+                        \${vo.title}<br>
+                        \${content}<br>
+                      </div>
+                    </li>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        `;
+				});
+
+				$('#boardbyme').html(tag_vos);
+			},
+			error: function(xhr, status, error) {
+				console.log('xhr.status : ', xhr.status);
+			}
+		});
+	});
+
     </script>
 
 </head>
@@ -104,7 +110,7 @@
 	<div class="like_List">
 		<ul class="asldkjasd" id="boardbyme">
 			<li>
-				<div class="liked_board">
+				<div class="liked_board" style="height: 0;">
 					<ul class="board_profile_info">
 
 

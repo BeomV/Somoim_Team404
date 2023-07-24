@@ -68,5 +68,8 @@
     <select id="U_SELECT_ID" resultType="test.com.moim.userinfo.model.UserinfoVO">
         select * from userinfo where user_id=#{user_id}
     </select>
+	<select id="ELEMENTS_IN_USERINFO" resultType="test.com.moim.userinfo.model.UserinfoVO">
+		select * from userinfo where user_id=#{user_id}
+	</select>
 
 </mapper>

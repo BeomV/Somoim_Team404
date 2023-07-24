@@ -160,6 +160,11 @@
 		where som_qvote_num = #{som_qvote_num}
 	</select>
 
+	<select id="LOGIN_ID_PROFILE" resultType="test.com.moim.board.model.Somoim_BoardVO">
+		select * from userinfo
+		where user_id = #{user_id}
+	</select>
+
 
 
 </mapper>

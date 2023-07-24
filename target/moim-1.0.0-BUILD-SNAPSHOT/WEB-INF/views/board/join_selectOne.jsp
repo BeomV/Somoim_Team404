@@ -377,7 +377,7 @@
 
                             <%--                    파트 게시글 작성자 이미지 프로필 사진 --%>
                             <img style="  object-fit: cover; width: 100%; height: 100%; border-radius: 50%;"
-                                 src="resources/uploadimg/${vo2.save_name}">
+                                 src="resources/uploadimg/${User_save_name.save_name}">
                         </div>
                     </div>
                     <p>${vo2.user_id}</p>

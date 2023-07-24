@@ -22,8 +22,8 @@
 
 
 	<div class="board_section">
-	
-		<form action="som_insertOK.do" enctype="multipart/form-data" method="post">
+
+		<form action="som_insertOK.do" enctype="multipart/form-data" method="post" onsubmit="return validateForm();">
 		<div class="moim_insert">
 			<h1>지역</h1>
 			<button type="button" id="moim_location">
@@ -102,5 +102,41 @@
 		</div>
 
 	</div>
+
+	<script>
+		function validateForm() {
+			var areaInput = document.getElementById('area');
+			var somTitleInput = document.getElementById('som_title');
+			var somContentTextArea = document.getElementsByName('som_content')[0];
+			var maxMemberInput = document.getElementById('moim_max');
+
+			if (areaInput.value.trim() === '') {
+				alert('지역을 입력해주세요.');
+				areaInput.focus();
+				return false;
+			}
+
+			if (somTitleInput.value.trim() === '') {
+				alert('모임 이름을 입력해주세요.');
+				somTitleInput.focus();
+				return false;
+			}
+
+			if (somContentTextArea.value.trim() === '') {
+				alert('모임 소개를 입력해주세요.');
+				somContentTextArea.focus();
+				return false;
+			}
+
+			if (maxMemberInput.value.trim() === '') {
+				alert('모임 정원을 입력해주세요.');
+				maxMemberInput.focus();
+				return false;
+			}
+
+			return true;
+		}
+	</script>
+
 </body>
 </html>

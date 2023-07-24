@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import test.com.moim.comments.model.som_commentsDAO;
 import test.com.moim.comments.model.som_commentsVO;
+import test.com.moim.userinfo.model.UserinfoVO;
 
 import java.util.List;
 
@@ -52,6 +53,8 @@ public class Community_commentsDAOimpl implements Community_commentsDAO {
 //		sqlSession.update("B_VCOUNT_UP",vo);
 		
 	}
+
+
 
 
 }

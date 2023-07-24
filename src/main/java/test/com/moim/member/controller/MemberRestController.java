@@ -54,7 +54,7 @@ public class MemberRestController {
 	@ResponseBody
 	@RequestMapping(value = "/som_member_profileCheck.do", method = RequestMethod.GET)
 	public List<MemberVO> som_member_profileCheck(MemberVO vo) {
-		log.info("잘 넘어옴");
+		log.info("�옒 �꽆�뼱�샂");
 		log.info("num : {}", vo.getNum());
 		
 		List<MemberVO> vos = service.profileCheck(vo);
@@ -77,6 +77,29 @@ public class MemberRestController {
 		
 		return result;
 		
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/som_member_deleteOK.do", method = RequestMethod.POST)
+	public String som_member_deleteOK(MemberVO vo) {
+		log.info("som_member_deleteOK.do().....{}", vo);
+		log.info("==========="+ vo.getSom_title() + vo.getSave_name());
+		log.info("{}", vo.getUser_id());
+		log.info("{}", vo.getNum());
+		
+		int result = service.delete(vo);
+		log.info("result : {}", result);
+		
+		UserinfoVO vo2 = new UserinfoVO();
+		vo2.setUser_id(vo.getUser_id());
+		vo2.setSom_title("/"+vo.getSom_title());
+		
+		
+		if(result==1)
+			return "OK";
+		else
+			return "NOT OK";
 	}
 	
 }

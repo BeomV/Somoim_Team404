@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="resources/css/board_min.css">
     <script src="https://kit.fontawesome.com/1652357a48.js" crossorigin="anonymous"></script>
 
+
     <title>Document</title>
 </head>
 <body>

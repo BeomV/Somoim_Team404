@@ -78,7 +78,7 @@
     <!--	좋아요 버튼을 누를 때 작용한다.-->
     <update id="CB_GOOD_COUNT_UP">
         update community_board
-        set good_count = good_count + 1 where num=#{num}
+        set good_count = good_count + 1 where num=#{num, jdbcType=VARCHAR}
     </update>
 
     <!--	좋아요를 누른 인원을 LIST에 추가한다.-->

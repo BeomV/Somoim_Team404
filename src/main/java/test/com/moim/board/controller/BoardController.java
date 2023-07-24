@@ -191,6 +191,16 @@ public class BoardController {
         log.info("infos..{}", infos);
 
 
+                String userId = (String)session.getAttribute("user_id");
+                Somoim_BoardVO user_profile= new Somoim_BoardVO();
+                user_profile.setUser_id(userId);
+
+                Somoim_BoardVO User_save_name = service.LOGIN_ID_PROFILE(user_profile);
+
+                model.addAttribute("User_save_name", User_save_name);
+
+
+
 
 
         Somoim_BoardVO vo2 = service.selectJoin(vo);

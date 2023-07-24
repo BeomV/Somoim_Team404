@@ -1,5 +1,7 @@
 package test.com.moim.community.model;
 
+import test.com.moim.userinfo.model.UserinfoVO;
+
 import java.util.List;
 
 public interface CommunityDAO {
@@ -31,6 +33,9 @@ public interface CommunityDAO {
 	public List<CommunityVO> mypageMyactivity_communitybyme(CommunityVO vo);
 
 	public List<CommunityVO> mypageMyactivity_good(CommunityVO vo);
+
+	public UserinfoVO user_list(UserinfoVO vo);
+
 
 
 }

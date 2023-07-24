@@ -1,4 +1,4 @@
-package test.com.moim.userinfo.controller;
+ package test.com.moim.userinfo.controller;
 
 import java.util.Random;
 
@@ -41,9 +41,11 @@ public class UserinfoRestController {
 		UserinfoVO vo2 = service.idCheck(vo);
 		log.info("{}",vo2);
 		if(vo2!=null) {
-			return "{\"result\":\"OK\"}";
-		}else {
+			log.info("{\"result\":\"NotOK\"}");
 			return "{\"result\":\"NotOK\"}";
+		}else {
+			log.info("{\"result\":\"Ok\"}");
+			return "{\"result\":\"Ok\"}";
 		}
 	}
 	@ResponseBody
@@ -75,12 +77,12 @@ public class UserinfoRestController {
 		// 이메일 객체 생성
 		Email email1 = new Email();
 		email1.setReceiver(email); // 수신자 설정
-		email1.setSubject("이메일 제목"); // 이메일 제목 설정
+		email1.setSubject("[ONANDOFF] 인증번호입니다."); // 이메일 제목 설정
 
 		// 인증번호 생성
 		Random random = new Random();
 		int verificationCode = random.nextInt(900000) + 100000; // 100000부터 999999까지의 난수 생성
-		String content = "이메일 내용입니다. 인증번호: " + verificationCode;
+		String content = "인증번호는 " + verificationCode + "입니다.";
 		log.info("email content...{}", content);
 		email1.setContent(content); // 이메일 내용 설정
 
@@ -125,10 +127,6 @@ public class UserinfoRestController {
 			return "{\"result\":\"FAIL\"}"; // 인증 코드 불일치 시 실패 결과 반환
 		}
 	}
-
-
-
-
 
 }
 

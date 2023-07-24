@@ -152,4 +152,7 @@ public class BoardService {
     public int vote_cancle(Somoim_Choice_Vote vo) {
         return dao.vote_cancle(vo);
     }
+    public Somoim_BoardVO LOGIN_ID_PROFILE(Somoim_BoardVO vo) {
+        return dao.LOGIN_ID_PROFILE(vo);
+    }
 }
