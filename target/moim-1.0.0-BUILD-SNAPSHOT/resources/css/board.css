@@ -41,7 +41,7 @@
   color: rgb(165, 165, 165);
 }
 
-.category_active{
+.board_grid li input:hover{
   color: #1785F2;
   font-weight: 600;
 }
@@ -88,7 +88,8 @@
   width: 420px;
   height: 150px;
   display: flex;
-  border: 1px solid #e6e6e6;
+  border: 1px solid #ccc;
+  justify-content: space-between;
   border-radius: 20px;
 
 }
@@ -118,6 +119,7 @@
 .moim_img span{
   text-align: left;
   margin: 10px;
+  flex-grow: 0.5;
 }
 
 .moim_img .hashtag {
@@ -129,8 +131,9 @@
 
 .moim_img h1{
   padding-top: 20px;
-  font-size: 18px;
+  font-size: 16px;
   width: 95%;
+  white-space: normal;
 
 }
 
@@ -885,6 +888,16 @@
 
 
 #som_register{
+  width: 100%;
+  margin-top: 100px;
+  padding: 5px 0px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: #1785F2;
+}
+
+#som_exit{
   width: 50%;
   margin-top: 100px;
   padding: 5px 0px;
@@ -893,6 +906,7 @@
   color: white;
   background-color: #1785F2;
 }
+
 
 .gallery_img_top{
   overflow: hidden;

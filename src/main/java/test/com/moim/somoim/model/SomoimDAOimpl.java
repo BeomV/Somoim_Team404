@@ -115,6 +115,12 @@ public class SomoimDAOimpl implements SomoimDAO {
 		return session.selectList("SOMOIMBYME_SELECT_ALL", user_id);
 	}
 
+	@Override
+	public SomoimVO somtitleCheck(String som_title) {
+		log.info("somtitleCheck...{}", som_title);
+		return session.selectOne("SOMOIMTITLE_CHECK", som_title);
+	}
+
 //	public UserinfoVO selectprofileOne(UserinfoVO uvo) {
 //		log.info("profilesearch()....{}", uvo);
 //		log.info("이건  mapper 에 있음");

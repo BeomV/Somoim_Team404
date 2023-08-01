@@ -53,7 +53,7 @@
     <div style="margin-top: 10%">
     <div style="text-align: center;">
     <h1>검색결과가 없습니다</h1>
-        <img src="/resources/uploadimg/강아지.jpg">
+
     </div>
     </div>
 </c:if>
@@ -72,7 +72,7 @@
                     <input type="hidden" value="${som_vo.create_date}">
                     <div class="moim_img" style="width: 340px">
                         <div class="img_box" style="width: 90%;">
-                            <img  src="/resources/uploadimg/${som_vo.somoim_img}">
+                            <img  src="resources/uploadimg/${som_vo.somoim_img}">
                             <span>
                 <p class="hashtag">${som_vo.category}</p>
                 <h1>${som_vo.som_title}</h1>
@@ -138,7 +138,7 @@
                     <input type="hidden" value="${cs_vo.write_date}">
                     <div class="moim_img" style="width: 340px">
                         <div class="img_box" >
-                            <img  src="/resources/uploadimg/${cs_vo.save_name}"></div>
+                            <img  src="resources/uploadimg/${cs_vo.save_name}"></div>
                         <span>
 									<h3>${cs_vo.title}</h3>
 								</span>

@@ -380,7 +380,7 @@
                                  src="resources/uploadimg/${User_save_name.save_name}">
                         </div>
                     </div>
-                    <p>${vo2.user_id}</p>
+                    <p>${user_id}</p>
                 </div>
                 <input type="hidden" name="som_board_num" value="${vo2.num}">
                 <input type="hidden" name="somoim_num" value="${vo2.somoim_num}">

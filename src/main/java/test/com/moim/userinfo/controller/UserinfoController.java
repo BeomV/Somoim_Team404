@@ -69,7 +69,7 @@ public class UserinfoController {
 			String realPath = sContext.getRealPath("resources/uploadimg");
 			log.info("realPath : {}", realPath);
 
-			File f = new File(realPath + "\\" + vo.getSave_name());
+			File f = new File(realPath + "/" + vo.getSave_name());
 			vo.getFile().transferTo(f);
 
 			//// create thumbnail image/////////

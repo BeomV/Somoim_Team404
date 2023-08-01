@@ -114,4 +114,10 @@
 			parameterType="HashMap">
 		select * from somoim_member where somoim_num=#{num}
 	</select>
+
+
+	<select id="SOMOIMTITLE_CHECK"
+			resultType="test.com.moim.somoim.model.SomoimVO">
+		select * from somoim where som_title = #{som_title}
+	</select>
 </mapper>

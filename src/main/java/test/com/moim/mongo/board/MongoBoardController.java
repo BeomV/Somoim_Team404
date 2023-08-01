@@ -101,7 +101,7 @@ public class MongoBoardController {
 
             log.info("realPath : {}", realPath);
 
-            File f = new File(realPath + "\\" + vo.getImage_name());
+            File f = new File(realPath + "/" + vo.getImage_name());
 
             vo.getFile().transferTo(f);
 

@@ -89,7 +89,13 @@ public class SomoimService {
 		log.info("somoimbyme_selectAll...{}", user_id);
 		return dao.somoimbyme_selectAll(user_id);
 	}
-	
+
+	public SomoimVO somtitleCheck(String som_title) {
+		log.info("somtitleCheck...{}", som_title);
+		return dao.somtitleCheck(som_title);
+	}
+
+
 //	public UserinfoVO selectprofileOne(UserinfoVO uvo) {
 //		log.info(".....!!{}", uvo);
 //		return dao.selectprofileOne(uvo);

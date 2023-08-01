@@ -16,7 +16,7 @@
     <div class="login_section">
 
        <form action="som_deleteOK.do?num=${param.num }" method="post">
-            
+
             <labal for="user_id">아이디</labal>
             <br>
             <input type="text" readonly placeholder="아이디를 입력하세요." id="user_id" name="user_id" value="${param.user_id }"> 

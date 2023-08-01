@@ -324,7 +324,7 @@
             </div>
         </div>
         <div class="mypage_center_sec">
-           <h2>나의 모임  <button type="button" onclick="som_selectAll()"> 더보기<img src="resources/uploadimg/plus.png" style="width:15px; height:15px;"></button></h2>
+           <h2>나의 모임  <button type="button" onclick="som_selectAll()"> 더보기</button></h2>
             <ul id="img_somoim" class="mypage_grid02">
 <!--                 <li> -->
 <!--                     <div class="mypage_moim_profile"> -->

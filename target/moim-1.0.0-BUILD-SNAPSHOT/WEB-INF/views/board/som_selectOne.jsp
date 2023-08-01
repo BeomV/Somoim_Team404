@@ -172,6 +172,11 @@
             	
             });//end click
             
+            
+         
+            
+            
+            
         });
 
 
@@ -228,8 +233,11 @@
 </script>
 
 
+
 </head>
 <body>
+
+
 <jsp:include page="../top_menu.jsp"></jsp:include>
 
 
@@ -237,26 +245,26 @@
 <!-- <form action="som_member_insertOK.do" method="POST"> -->
     <div class="join_section">
 
-        <c:set var="isMenuShown" value="false" />
+       <c:set var="member_menu_check" value="false" />
+<c:set var="som_member_check" value="false" />
 
-        <%-- somoimUser_id 리스트를 순회하며 일치하는 값이 있는지 검사 --%>
-        <c:forEach items="${somoimUser_id}" var="som_user_id">
-            <c:if test="${som_user_id.user_id eq user_id}">
-                <%-- 일치하는 값이 있으면 isMenuShown 변수를 true로 설정 --%>
-                <c:set var="isMenuShown" value="true" />
-                <%-- som_top_menu.jsp를 포함시킴 --%>
-                <jsp:include page="./som_top_menu.jsp"></jsp:include>
-            </c:if>
-        </c:forEach>
+<%-- somoimUser_id 리스트를 순회하며 일치하는 값이 있는지 검사 --%>
+<c:forEach items="${somoimUser_id}" var="som_user_id">
+    <c:if test="${som_user_id.user_id eq user_id}">
+        <c:set var="member_menu_check" value="true" />
+        <c:set var="som_member_check" value="true" />
+        <jsp:include page="./som_top_menu.jsp"></jsp:include>
+    </c:if>
+</c:forEach>
 
-        <%-- isMenuShown 변수가 false일 경우에만 메뉴를 두 번째로 출력 --%>
-        <c:if test="${!isMenuShown}">
+        <%-- member_menu_check 변수가 false일 경우에만 메뉴를 두 번째로 출력 --%>
+        <c:if test="${!member_menu_check}">
             <div class="join_gnb">
                 <li><a href="som_selectOne.do?num=${num}">홈</a></li>
             </div>
         </c:if>
         <div class="img_info">
-            <img style="height:100%; width:100%;" src="resources/uploadimg/${vo2.somoim_img}">
+            <img style="width:100%;" src="resources/uploadimg/${vo2.somoim_img}">
         </div>
         <div class="som_tit">
             <h1 class="main_tit" style="padding: 20px;">${vo2.som_title}</h1>
@@ -286,7 +294,14 @@
         <input type="hidden" name="num" value="${vo2.num}">
         <input type="hidden" name="som_title" value="${vo2.som_title}">
         <input type="hidden" name="save_name" value="${uvo2.save_name}">
-        <input type="submit" id="som_register" value="모임 가입하기">
+        <%-- 아이디가 하나도 일치하지 않을 경우 --%>
+<c:if test="${not som_member_check}">
+    <input type="submit" id="som_register" value="모임 가입하기">
+</c:if>
+
+<c:if test="${member_menu_check}">
+    <input type="submit" id="som_exit" value="모임 탈퇴하기" style="border-radius: 5px;padding: 4px 0; margin-top: 20px; width: 100%; background-color: #1785F2; color: white; border: none;">
+</c:if>
         <a href="login.do" id="loginCheck">로그인이 필요합니다.</a>
         <br>
         <br>
@@ -348,6 +363,34 @@
     }
 </script>
 
+<script>
+$("input[id='som_exit']").on("click", function(){
+    $.ajax({
+        url: 'som_member_deleteOK.do',
+        method: 'POST',
+        data: {
+            user_id: '${user_id}',
+            num: ${vo2.num},
+            som_title: '${vo2.som_title}'
+        },
+        success: function(response) {
+            console.log('som_member_deleteOK ajax successed...');
+            console.log('response : ', response);
 
+            if (response === 'OK') {
+                alert('소모임에서 탈퇴되었습니다.');
+                location.reload();
+            } else if (response === 'NOT OK') {
+                alert('소모임 가입이 되어있지 않습니다.');
+            } else {
+                alert('현재 오류가 발생했습니다. 빠른 시일 내에 검토하겠습니다.');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log('xhr.status : ', xhr.status);
+        }
+    });
+});
+</script>
 </body>
 </html>

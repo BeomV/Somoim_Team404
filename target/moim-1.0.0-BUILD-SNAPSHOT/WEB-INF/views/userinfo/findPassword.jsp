@@ -17,10 +17,10 @@ function idCheck(){
 			console.log('ajax...success:', obj);
 			console.log('ajax...success:', obj.result);
 			let msg = '';
-			if(obj.result==='OK'){
-				msg = '가입된 아이디입니다.';
+			if(obj.result==='NotOK'){
+				msg = '아이디가 조회되었습니다.';
 			}else{
-				msg = '없는 아이디입니다.';
+				msg = '아이디가 조회되지 않습니다.';
 			}
 			$('#demo').text(msg);
 		},
@@ -68,7 +68,7 @@ function memberCheck() {
         </div>
         <div class="total" >
             <h3 style="height: 4px; margin-right: 50%;">아이디</h3>
-            <input type="text"  placeholder="아이디를 입력하세요" value="kim123" id="user_id" style="width: 50%;" >
+            <input type="text"  placeholder="아이디를 입력하세요" name="user_id" id="user_id" style="width: 50%;" >
             <span id="demo"></span> <br>   
         <button style="width: 30%;" type="button" onclick="idCheck()">조회</button>
         <hr>

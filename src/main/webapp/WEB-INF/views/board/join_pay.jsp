@@ -36,9 +36,9 @@
                         <c:set var="participantCount" value="${fn:length(fn:split(vo.participant, '/'))}" />
                         <c:set var="moneyPerPerson" value="${vo.money / participantCount}" />
                         <p>1인당 금액: <fmt:formatNumber value="${moneyPerPerson}" maxFractionDigits="0" /></p>
-                        <button type="button" id="payment_btn" onclick="schedule_payment(this)">
-                            <img src="resources/uploadimg/btn_request_tiny.png">
-                        </button>
+<%--                        <button type="button" id="payment_btn" onclick="schedule_payment(this)">--%>
+<%--                            <img src="resources/uploadimg/btn_request_tiny.png">--%>
+<%--                        </button>--%>
                     </span>
                     </div>
                     <div class="payment_right">

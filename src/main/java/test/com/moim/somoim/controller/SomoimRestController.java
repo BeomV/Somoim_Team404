@@ -50,7 +50,7 @@ public class SomoimRestController {
     @RequestMapping(value = "/mysomoim_selectAll.do", method = RequestMethod.GET)
     public List<SomoimVO> mysomoim_selectAll(String user_id){
     	log.info("user_id : {}", user_id);
-    	
+
     	List<SomoimVO> vos = service.mysomoim_selectAll(user_id);
     	for (SomoimVO x : vos) {
 			log.info(x.getSom_title());
@@ -60,23 +60,33 @@ public class SomoimRestController {
 
     	return vos;
     }
-    
+
     @ResponseBody
     @RequestMapping(value = "/somoimbyme_selectAll.do", method = RequestMethod.GET)
     public List<SomoimVO> somoimbyme_selectAll(String user_id){
     	log.info("user_id : {}", user_id);
-    	
+
     	List<SomoimVO> vos = service.somoimbyme_selectAll(user_id);
     	for (SomoimVO x : vos) {
     		log.info(x.getSom_title());
     		log.info(x.getSomoim_img());
     		log.info("{}", x.getNum());
     	}
-    	
+
     	return vos;
     }
-    
 
+    @ResponseBody
+    @RequestMapping(value = "/somtitleCheck.do", method = RequestMethod.GET)
+    public int somtitleCheck(String som_title){
+        log.info("넘어온 som_title : {}", som_title);
+
+        SomoimVO vo = service.somtitleCheck(som_title);
+        if(vo==null) {
+            return 1;
+        } else
+            return 0;
+    }
 
 
 

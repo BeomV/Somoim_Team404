@@ -220,7 +220,7 @@
 
                 // Ajax 호출
                 $.ajax({
-                    url: '/json_m_idCheck.do',
+                    url: 'json_m_idCheck.do',
                     method: 'GET',
                     data: { user_id: username },
                     dataType: 'json',

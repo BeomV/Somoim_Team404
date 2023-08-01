@@ -25,8 +25,7 @@
             </div>
             </form>
             <div class="login">
-            	<a href="message.do">🔔</a>
-           		<a href="mypage.do">${user_id } 님</a> 
+           		<a href="mypage.do">${user_id } 님</a>
                 <a href="login.do">로그인</a>
                 <a href="logout.do">로그아웃</a>
             </div>

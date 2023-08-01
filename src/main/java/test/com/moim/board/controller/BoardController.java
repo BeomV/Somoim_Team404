@@ -340,7 +340,7 @@ public class BoardController {
 
                 log.info("realPath : {}", realPath);
 
-                File f = new File(realPath + "\\" + vo.getSave_image());
+                File f = new File(realPath + "/" + vo.getSave_image());
                 vo.getFile().transferTo(f);
             }
         } else {

@@ -113,7 +113,7 @@
                 <li>
                     <p>${vo.item}</p>
                     <input type="hidden" value="${vo.item}" class="point_item" style="display: none">
-                    <input type="hidden" value="${vo.point}" class="point_point" style="display: none">>
+                    <input type="hidden" value="${vo.point}" class="point_point" style="display: none">
                     <button type="button" class="purchase-btn">${vo.point}p</button>
                 </li>
             </c:if>
@@ -181,7 +181,7 @@
 </c:if>
 
 </body>
-<script src="/resources/js/point.js"></script>
+<script src="resources/js/point.js"></script>
 
 
 </html>

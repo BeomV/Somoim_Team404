@@ -162,7 +162,7 @@ public class SomoimController {
 
 			log.info("realPath : {}", realPath);
 
-			File f = new File(realPath + "\\" + vo.getSomoim_img());
+			File f = new File(realPath + "/" + vo.getSomoim_img());
 
 			vo.getFile().transferTo(f);
 
@@ -277,7 +277,7 @@ public class SomoimController {
 
 			log.info("realPath : {}", realPath);
 
-			File f = new File(realPath + "\\" + vo.getSomoim_img());
+			File f = new File(realPath + "/" + vo.getSomoim_img());
 
 			vo.getFile().transferTo(f);
 
@@ -333,19 +333,16 @@ public class SomoimController {
 		String path = "";
 		if(vo2==null) {
 			log.info("로그인 실패");
-			path = "redirect:som_delete.do?num="+num+"&user_id="+user_id;
+			return "redirect:som_delete.do?num="+num+"&user_id="+user_id;
+
 		}
 		else {
 			log.info("로그인 성공");
-			path = "redirect:som_selectAll.do";
+			return "redirect:som_selectAll.do";
+
 		}
 
-		log.info("path......====={}", path);
 
-		if (result==1)
-			return path;
-		else
-			return path;
 	}
 
 

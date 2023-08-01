@@ -150,14 +150,14 @@
     </div>
     <div class="main_pictogram">
        <ul>
-          <li><a href="eventsSelctOne.do?num=22"><i class="fa-solid fa-plane-departure"></i></a></li>
-           <li><a href="eventsSelctOne.do?num=23"><i class="fa-solid fa-person-running"></i></a></li>
-          <li><a href="eventsSelctOne.do?num=24"><i class="fa-solid fa-people-group"></i></a></li>
-          <li><a href="eventsSelctOne.do?num=25"><i class="fa-solid fa-gamepad"></i></a></li>
-          <li><a href="eventsSelctOne.do?num=28"><i class="fa-solid fa-person-hiking"></i></a></li>
-          <li><a href="eventsSelctOne.do?num=29"><i class="fa-solid fa-paw"></i></a></li>
-          <li><a href="eventsSelctOne.do?num=30"><i class="fa-solid fa-laptop-file"></i></a></li>
-          <li><a href="eventsSelctOne.do?num=31"><i class="fa-solid fa-language"></i></a></li>
+          <li><a href="eventsSelctOne.do?num=41"><i class="fa-solid fa-plane-departure"></i></a></li>
+           <li><a href="eventsSelctOne.do?num=42"><i class="fa-solid fa-person-running"></i></a></li>
+          <li><a href="eventsSelctOne.do?num=43"><i class="fa-solid fa-people-group"></i></a></li>
+          <li><a href="eventsSelctOne.do?num=44"><i class="fa-solid fa-gamepad"></i></a></li>
+          <li><a href="eventsSelctOne.do?num=45"><i class="fa-solid fa-person-hiking"></i></a></li>
+          <li><a href="eventsSelctOne.do?num=46"><i class="fa-solid fa-paw"></i></a></li>
+          <li><a href="eventsSelctOne.do?num=47"><i class="fa-solid fa-laptop-file"></i></a></li>
+          <li><a href="eventsSelctOne.do?num=48"><i class="fa-solid fa-language"></i></a></li>
        </ul>
     </div>
     <div class="moim_list01" style="height: auto">
@@ -169,7 +169,7 @@
                 <li>
                     <a href="som_selectOne.do?num=${vo.num}">
                     <div class="moimst_list_01_img_box">
-                       <img  src="resources/uploadimg/${vo.somoim_img}"></div>
+                       <img style="height: 100%;" src="resources/uploadimg/${vo.somoim_img}"></div>
                     <div class="main_selectList">
                         <p class="hashtag">${vo.category}</p>
                         <h1>${vo.som_title}</h1>

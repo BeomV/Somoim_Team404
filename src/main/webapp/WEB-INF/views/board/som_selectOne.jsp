@@ -264,7 +264,7 @@
             </div>
         </c:if>
         <div class="img_info">
-            <img style="height:100%; width:100%;" src="resources/uploadimg/${vo2.somoim_img}">
+            <img style="width:100%;" src="resources/uploadimg/${vo2.somoim_img}">
         </div>
         <div class="som_tit">
             <h1 class="main_tit" style="padding: 20px;">${vo2.som_title}</h1>
@@ -300,7 +300,7 @@
 </c:if>
 
 <c:if test="${member_menu_check}">
-    <input type="submit" id="som_exit" value="모임 탈퇴하기">
+    <input type="submit" id="som_exit" value="모임 탈퇴하기" style="border-radius: 5px;padding: 4px 0; margin-top: 20px; width: 100%; background-color: #1785F2; color: white; border: none;">
 </c:if>
         <a href="login.do" id="loginCheck">로그인이 필요합니다.</a>
         <br>
@@ -372,7 +372,7 @@ $("input[id='som_exit']").on("click", function(){
             num: ${vo2.num},
             som_title: '${vo2.som_title}'
         },
-        success: function(response) 
+        success: function(response) {
             console.log('som_member_deleteOK ajax successed...');
             console.log('response : ', response);
 

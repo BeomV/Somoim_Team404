@@ -81,7 +81,7 @@
 <div class="board_section">
     <div class="board_category">
         <ul class="board_grid">
-            <li><input type="button" name="category" value="여행" class="category_active"></li>
+            <li><input type="button" name="category" value="여행"></li>
             <li><input type="button" name="category" value="운동"></li>
             <li><input type="button" name="category" value="야구"></li>
             <li><input type="button" name="category" value="게임/오락"></li>
@@ -124,7 +124,7 @@
                                 <img src="resources/uploadimg/${vo.somoim_img}"></div>
                             <span>
 									<p class="hashtag">${vo.category}</p>
-									<h1>${vo.som_title}</h1>
+									<h1 style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${vo.som_title}</h1>
 									<p class="sub_tit"> 소셜링 ${vo.area} ${vo.create_date }</p>
 								</span>
 

@@ -29,8 +29,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		
 		if(sPath.equals("/selectAll.do")
-				|| sPath.equals("/selectOne.do")) {
-			
+				|| sPath.equals("/selectOne.do")
+				|| sPath.equals("/point_selectAll.do")) {
+
 			if(user_id == null) {
 				response.sendRedirect("login.do");
 				return false;

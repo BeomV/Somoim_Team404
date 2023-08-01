@@ -22,5 +22,7 @@ public interface SomoimDAO {
 	public List<SomoimVO> mysomoim_selectAll(String user_id);
 	public List<SomoimVO> somoimbyme_selectAll(String user_id);
 
+	public SomoimVO somtitleCheck(String som_title);
+
 
 }

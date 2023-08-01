@@ -122,7 +122,7 @@ public class MypageController {
 			
 			log.info("realPath : {}", realPath);
 
-			File f = new File(realPath + "\\" + vo.getSave_name());
+			File f = new File(realPath + "/" + vo.getSave_name());
 
 			vo.getFile().transferTo(f);
 
