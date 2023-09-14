@@ -45,3 +45,4 @@ git checkout 브랜치명
 ```
 
 
+# somoim_team404
